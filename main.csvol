@@ -1,1 +1,18 @@
-CREATE FILE main
+CREATE FILE foo
+CREATE FILE bar
+PULL FILE foo
+COMMENT Yeah so this is a comment. I like coffee.
+CREATE COLUMNS Name Grade ID_Number
+CREATE ROWS 1 2 3 4 5 6 7 8 9 10
+COMMENT You have to "drop" files to write to a different one.
+DROP
+
+
+COMMENT You can have empty lines too!
+
+
+PULL FILE bar
+COMMENT Underscores must be used, or else it will be interpreted as another column.
+CREATE COLUMNS Name Age Job_Title
+CREATE ROWS 1 2 3 4
+DROP

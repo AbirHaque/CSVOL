@@ -11,7 +11,7 @@ We plan on moving meeting notes to a group website in the future. General meetin
 
 Implement the following file commands:
 - Create new file [Done]
-- Pull existing file to read
+- Pull existing file to read [Done]
 - Drop existing file [Done]
 - Print contents of file
 - Edit contents of file
