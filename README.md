@@ -10,7 +10,7 @@ The interpreter is written in entirely Java. All development occurred on Repl.it
 We plan on moving meeting notes to a group website in the future. General meeting notes for all of Wichita CPU's operations can be found here: https://docs.google.com/document/d/1penokzeQKJ7PXM5JvUvn8pT_uso4QuSFwjQhdeqkrpU/edit.
 
 Implement the following file commands:
-- Create new File
+- Create new file [Done]
 - Pull existing file to read
 - Drop existing file [Done]
 - Print contents of file
