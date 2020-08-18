@@ -1,18 +1,60 @@
+COMMENT Sample CSVOL program created by the Wichita Computer Programmers' Union.
+COMMENT Yeah so this is a comment. We like coffee.
+
+
 CREATE FILE foo
 CREATE FILE bar
+CREATE FILE foobar
+CREATE FILE to_be_deleted
+
+
+COMMENT Write to foo.csv
 PULL FILE foo
-COMMENT Yeah so this is a comment. I like coffee.
-CREATE COLUMNS Name Grade ID_Number
-CREATE ROWS 1 2 3 4 5 6 7 8 9 10
-COMMENT You have to "drop" files to write to a different one.
-DROP
+  COMMENT You may indent your code, although it is not enforced. It is good practice to indent your code!
+  CREATE COLUMNS Name Grade ID_Number
+  CREATE ROWS 10
+  COMMENT You need to "drop" files to write to a different one.
+  DROP FILE
+PRINT TEXT File: foo.csv:
+PRINT FILE foo
 
 
-COMMENT You can have empty lines too!
-
-
+COMMENT By the way, you may have empty lines too!
+COMMENT Write to bar.csv.
 PULL FILE bar
-COMMENT Underscores must be used, or else it will be interpreted as another column.
-CREATE COLUMNS Name Age Job_Title
-CREATE ROWS 1 2 3 4
-DROP
+  COMMENT Underscores must be used, or else it will be interpreted as another column.
+  CREATE COLUMNS Name Age Job_Title
+  CREATE ROWS 4
+  DROP FILE
+PRINT TEXT File: bar.csv:
+PRINT FILE bar
+
+COMMENT Write to foobar.csv.
+PULL FILE foobar
+  CREATE COLUMNS Name Age Job_Title
+  CREATE ROWS 10
+  COMMENT You may populate empty cells as well.
+  ADD 0 1 John Doe
+  ADD 1 1 REDACTED
+  ADD 2 1 REDACTED
+  DROP FILE
+PRINT TEXT File: foobar.csv:
+PRINT FILE foobar
+
+COMMENT In addition, editing cells after dropping is possible.
+EDIT FILE foobar 0 2 Jane Doe
+EDIT FILE foobar 1 2 REDACTED
+EDIT FILE foobar 2 2 REDACTED
+PRINT TEXT File: foobar.csv [EDITED]:
+PRINT FILE foobar
+
+
+COMMENT Command through the command-line!
+PULL COMMAND
+
+
+COMMENT Lastly, you may delete undesirable files.
+DELETE FILE to_be_deleted
+
+
+PRINT TEXT Program ended.

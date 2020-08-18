@@ -1,4 +1,4 @@
-# CSVOL
+﻿# CSVOL
 Comma Separated Value Organization Language, or CSVOL (\kasväl\\), is a query language that stores data in CSV files.
 
 You can write CSVOL code in the main.csvol file. It is still a work in progress, so there is an extremely limited amount of functionality.
@@ -15,8 +15,8 @@ Implement the following file commands:
 - Create new file [Done]
 - Pull existing file to read [Done]
 - Drop existing file [Done]
-- Print contents of file
-- Edit contents of file
+- Print contents of file [Done]
+- Edit contents of file [Done]
 - Delete contents of file
 
 More additions will be decided upon and listed during general meetings.
