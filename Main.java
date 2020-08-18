@@ -15,7 +15,7 @@ public class Main
     System.out.println("CSVOL 1.0.0");
     System.out.println("Created by the Wichita Computer Programmers' Union");
     System.out.println();
-    System.out.println("\tType \"PULL COMMAND\" in the main.csvol file to instruct through the command-line.");
+    System.out.println("\tType \"PULL REPL\" in the main.csvol file to instruct through the command-line.");
     System.out.println("\tAlternatively, you may write instructions in the main.csvol file.");
     System.out.println();
 
@@ -90,7 +90,7 @@ public class Main
               columnCount = 0;
               rowCount = 0;
             }
-            if ((arguments.get(1)).equals("COMMAND")) //Pull command function      	
+            if ((arguments.get(1)).equals("REPL")) //Pull command function      	
             {
               System.out.println("\tType \"HELP\" for a list of commands and their usage.");
               System.out.println();
@@ -112,7 +112,7 @@ public class Main
               columnCount = 0;
               rowCount = 0;
             }
-            if ((arguments.get(1)).equals("COMMAND")) //Drop command function      	
+            if ((arguments.get(1)).equals("REPL")) //Drop command function      	
             {
               isCommand = false;
               in = new BufferedReader(new FileReader("main.csvol"));           
@@ -151,44 +151,92 @@ public class Main
               {
                 currentFile = new File((arguments.get(2)) + ".csv");
                 BufferedReader inEdit = new BufferedReader(new FileReader(currentFile.getName())); 
-                int columnPointer = Integer.parseInt(arguments.get(3));
-                int rowPointer = Integer.parseInt(arguments.get(4));
+                if ((arguments.get(3)).equals("COLUMNS"))
+                {
+                  if ((arguments.get(4)).equals("ADD"))
+                  {
+                    int columnsToAdd = 0;
+                    String columnsString = inEdit.readLine();
+                    PrintWriter outEdit = new PrintWriter(new FileWriter(currentFile.getName()));
+                    for (int i = 5; i < arguments.size(); i++)
+                    {
+                      columnsString += ("," + (arguments.get(i)));
+                      columnsToAdd++;
+                    }
+                    ArrayList<String> fileLines = new ArrayList<String>();
+                    fileLines.add(columnsString);
+                    String emptyCells = "";
+                    for (int i = 0; i < columnsToAdd; i++)
+                    {
+                      emptyCells+=",0";
+                    }
+                    while(inEdit.ready())
+                    {
+                      fileLines.add(inEdit.readLine()+emptyCells);
+                    }
+                    for (int i = 0; i < fileLines.size(); i++)
+                    {
+                      outEdit.println(fileLines.get(i));
+                    }
+                    outEdit.close();
+                  }
+                  if ((arguments.get(4)).equals("DELETE"))
+                  {
 
-                ArrayList<String> fileLines = new ArrayList<String>();
-                for (int i = 0; i <= rowPointer; i++)
-                {
-                  fileLines.add(inEdit.readLine());
+                  }
                 }
-                StringTokenizer tokenizerEdit = new StringTokenizer(fileLines.get(rowPointer), ",");
-                ArrayList<String> rowElements = new ArrayList<String>();
-                while(tokenizerEdit.hasMoreTokens())
+                if ((arguments.get(3)).equals("ROWS"))
                 {
-                  rowElements.add(tokenizerEdit.nextToken());
+                  if ((arguments.get(4)).equals("ADD"))
+                  {
+
+                  }
+                  if ((arguments.get(4)).equals("DELETE"))
+                  {
+
+                  }
                 }
-                String cellItem = "";
-                for (int i = 5; i < arguments.size()-1; i++)
+                if ((arguments.get(3)).equals("ROWS") == false && (arguments.get(3)).equals("COLUMNS") == false)
                 {
-                  cellItem += (arguments.get(i)).replace(',',' ') + " ";
+                  int columnPointer = Integer.parseInt(arguments.get(3));
+                  int rowPointer = Integer.parseInt(arguments.get(4));
+
+                  ArrayList<String> fileLines = new ArrayList<String>();
+                  for (int i = 0; i <= rowPointer; i++)
+                  {
+                    fileLines.add(inEdit.readLine());
+                  }
+                  StringTokenizer tokenizerEdit = new StringTokenizer(fileLines.get(rowPointer), ",");
+                  ArrayList<String> rowElements = new ArrayList<String>();
+                  while(tokenizerEdit.hasMoreTokens())
+                  {
+                    rowElements.add(tokenizerEdit.nextToken());
+                  }
+                  String cellItem = "";
+                  for (int i = 5; i < arguments.size()-1; i++)
+                  {
+                    cellItem += (arguments.get(i)).replace(',',' ') + " ";
+                  }
+                  cellItem += (arguments.get(arguments.size()-1)).replace(',',' ');
+                  rowElements.set(columnPointer, cellItem);
+                  String editedLine = "";
+                  for (int i = 0; i < rowElements.size()-1; i++)
+                  {
+                    editedLine += rowElements.get(i) + ",";
+                  }
+                  editedLine += rowElements.get(rowElements.size()-1);
+                  fileLines.set(rowPointer,editedLine);
+                  while(inEdit.ready())
+                  {
+                    fileLines.add(inEdit.readLine());
+                  }
+                  PrintWriter outEdit = new PrintWriter(new FileWriter(currentFile.getName()));
+                  for (int i = 0; i < fileLines.size(); i++)
+                  {
+                    outEdit.println(fileLines.get(i));
+                  }
+                  outEdit.close();
                 }
-                cellItem += (arguments.get(arguments.size()-1)).replace(',',' ');
-                rowElements.set(columnPointer, cellItem);
-                String editedLine = "";
-                for (int i = 0; i < rowElements.size()-1; i++)
-                {
-                  editedLine += rowElements.get(i) + ",";
-                }
-                editedLine += rowElements.get(rowElements.size()-1);
-                fileLines.set(rowPointer,editedLine);
-                while(inEdit.ready())
-                {
-                  fileLines.add(inEdit.readLine());
-                }
-                PrintWriter outEdit = new PrintWriter(new FileWriter(currentFile.getName()));
-                for (int i = 0; i < fileLines.size(); i++)
-                {
-                  outEdit.println(fileLines.get(i));
-                }
-                outEdit.close();
               }
               break;
           case "ADD": 
@@ -254,12 +302,12 @@ public class Main
             System.out.println("PULL [options] [args...] ---- Sets current method of input/output.");
             System.out.println("Where options include:");
             System.out.println("\tFILE [filename] ---- Set dictated file to manipulate.");
-            System.out.println("\tCOMMAND ---- Set command-line as method of command input.");
+            System.out.println("\tREPL ---- Set command-line as method of command input.");
             System.out.println();
             System.out.println("DROP [options] ---- Nulls current method of input/output.");
             System.out.println("Where options include:");
             System.out.println("\tFILE ---- Nulls dictated file to manipulate.");
-            System.out.println("\tCOMMAND ---- Ends command-line input.");
+            System.out.println("\tREPL ---- Ends command-line input.");
             System.out.println();
             System.out.println("PRINT [option] [arg] ---- Outputs item in command-line dependent on option and arg.");
             System.out.println("Where options include:");

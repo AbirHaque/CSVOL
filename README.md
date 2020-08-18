@@ -1,7 +1,7 @@
 ﻿# CSVOL
-Comma Separated Value Organization Language, or CSVOL (\kasväl\\), is a query language that stores data in CSV files.
+Comma Separated Value Organization Language, or CSVOL (\kasväl\\), is an interpreted language for managing databases in CSV file format.
 
-You can write CSVOL code in the main.csvol file. It is still a work in progress, so there is an extremely limited amount of functionality.
+You can write CSVOL code in the main.csvol file. Alternatively, you may instruct through the command-line by writing PULL REPL to a blank main.csvol file.
 
 Project Link: https://github.com/AbirHaque/CSVOL
 
@@ -11,13 +11,17 @@ The interpreter is written in entirely Java. All development occurred on Repl.it
 #### Roadmap
 We plan on moving meeting notes to a group website in the future. General meeting notes for all of Wichita CPU's operations can be found here: https://docs.google.com/document/d/1penokzeQKJ7PXM5JvUvn8pT_uso4QuSFwjQhdeqkrpU/edit.
 
-Implement the following file commands:
-- Create new file [Done]
-- Pull existing file to read [Done]
-- Drop existing file [Done]
-- Print contents of file [Done]
-- Edit contents of file [Done]
+Will implement the following functions:
 - Delete contents of file
+- Maybe Turing completeness?
+
+Current functionality:
+- Enable REPL environment
+- Create new file
+- Pull existing file to read
+- Drop existing file
+- Print contents of file
+- Edit contents of file
 
 More additions will be decided upon and listed during general meetings.
 

@@ -49,8 +49,8 @@ PRINT TEXT File: foobar.csv [EDITED]:
 PRINT FILE foobar
 
 
-COMMENT Command through the command-line!
-PULL COMMAND
+COMMENT Command through a REPL environment!
+PULL REPL
 
 
 COMMENT Lastly, you may delete undesirable files.
