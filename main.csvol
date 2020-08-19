@@ -31,7 +31,7 @@ PRINT FILE bar
 
 COMMENT Write to foobar.csv.
 PULL FILE foobar
-  CREATE COLUMNS Name Age Job_Title
+  CREATE COLUMNS Name Age Job
   CREATE ROWS 10
   COMMENT You may populate empty cells as well.
   ADD 0 1 John Doe
@@ -45,6 +45,9 @@ COMMENT In addition, editing cells after dropping is possible.
 EDIT FILE foobar 0 2 Jane Doe
 EDIT FILE foobar 1 2 REDACTED
 EDIT FILE foobar 2 2 REDACTED
+EDIT FILE foobar COLUMNS DELETE Age Job
+EDIT FILE foobar COLUMNS ADD Address DOB
+EDIT FILE foobar ROWS ADD 20
 PRINT TEXT File: foobar.csv [EDITED]:
 PRINT FILE foobar
 
@@ -55,6 +58,9 @@ PULL REPL
 
 COMMENT Lastly, you may delete undesirable files.
 DELETE FILE to_be_deleted
+DELETE FILE foo
+DELETE FILE bar
+DELETE FILE foobar
 
 
 PRINT TEXT Program ended.

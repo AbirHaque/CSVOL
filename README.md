@@ -1,4 +1,4 @@
-﻿# CSVOL
+# CSVOL
 Comma Separated Value Organization Language, or CSVOL (\kasväl\\), is an interpreted language for managing databases in CSV file format.
 
 You can write CSVOL code in the main.csvol file. Alternatively, you may instruct through the command-line by writing PULL REPL to a blank main.csvol file.

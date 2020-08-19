@@ -1,7 +1,3 @@
-/*
-  CSVOL Interpreter
-*/
-
 import java.io.*;
 import java.util.*;
 import java.nio.channels.FileChannel;
@@ -10,22 +6,25 @@ import java.nio.file.Paths;
 
 public class Main
 {
+    public static BufferedReader in;
+    public static PrintWriter out;
+    public static File currentFile;
+    public static int lineNumber;
+    public static int columnCount;
+    public static int rowCount;
+    public static boolean isCommand;
+
   public static void main(String[] args) throws Exception
   {
-    System.out.println("CSVOL 1.0.0");
-    System.out.println("Created by the Wichita Computer Programmers' Union");
-    System.out.println();
-    System.out.println("\tType \"PULL REPL\" in the main.csvol file to instruct through the command-line.");
-    System.out.println("\tAlternatively, you may write instructions in the main.csvol file.");
-    System.out.println();
+    Terminal.start();
 
-    BufferedReader in = new BufferedReader(new FileReader("main.csvol"));
-    PrintWriter out = null;
-    File currentFile = null;
-    int lineNumber = 0;
-    int columnCount = 0;
-    int rowCount = 0;
-    boolean isCommand = false;
+    in = new BufferedReader(new FileReader("main.csvol"));
+    out = null;
+    currentFile = null;
+    lineNumber = 0;
+    columnCount = 0;
+    rowCount = 0;
+    isCommand = false;
 
     while(in.ready()||isCommand==true)
     {
@@ -49,280 +48,67 @@ public class Main
           case "CREATE": //Create functions
             if ((arguments.get(1)).equals("FILE")) //Create file function       	
             {
-              currentFile = new File((arguments.get(2)) + ".csv");
-              currentFile.createNewFile();
-              currentFile = null;
+              Create.file(arguments);
             }
             if ((arguments.get(1)).equals("COLUMNS")) //Create column function       	
             {
-              for (int i = 2; i < arguments.size()-1; i++)
-              {
-                out.print((arguments.get(i)) + ",");
-                columnCount++;
-              }
-              out.print((arguments.get(arguments.size()-1)));
-              out.println();
+              Create.columns(arguments);
             }
             if ((arguments.get(1)).equals("ROWS")) //Create row function       	
             {
-              for (int i = 0; i < Integer.parseInt(arguments.get(2)); i++)
-              {
-                for (int k = 0; k < columnCount; k++)
-                {
-                  out.print("0,");
-                }
-                out.print("0");
-                out.println();
-                rowCount++;
-              }
+              Create.rows(arguments);
             }
             break;
           case "PULL": //Pull functions
             if ((arguments.get(1)).equals("FILE")) //Pull existing file function      	
             {
-              currentFile = new File((arguments.get(2)) + ".csv");
-              String fileContents = Files.readString(Paths.get(currentFile.getName()));
-              out = new PrintWriter(new FileWriter((arguments.get(2)) + ".csv"));
-              if (isCommand == true)
-              {
-                out.print(fileContents);
-              }
-              columnCount = 0;
-              rowCount = 0;
+              Pull.file(arguments);
             }
             if ((arguments.get(1)).equals("REPL")) //Pull command function      	
             {
-              System.out.println("\tType \"HELP\" for a list of commands and their usage.");
-              System.out.println();
-              in = new BufferedReader(new InputStreamReader(System.in)); 
-              isCommand = true;     
-              columnCount = 0;
-              rowCount = 0;              
+              Pull.repl();            
             }
-            //Code for functions
-
-
             break;
           case "DROP": //Drop function
             if ((arguments.get(1)).equals("FILE")) //Drop current file function      	
             {
-              currentFile = null;
-              out.close();
-              out = null;
-              columnCount = 0;
-              rowCount = 0;
+              Drop.file();
             }
             if ((arguments.get(1)).equals("REPL")) //Drop command function      	
             {
-              isCommand = false;
-              in = new BufferedReader(new FileReader("main.csvol"));           
-              for (int i = 0; i < lineNumber; i++) 
-              {
-                in.readLine();
-              }
-              columnCount = 0;
-              rowCount = 0;
+              Drop.repl();
             }
             break;
           case "PRINT": //Print functions
             if ((arguments.get(1)).equals("TEXT")) //Print text function    	
             {
-              for (int i = 2; i < arguments.size(); i++)
-              {
-                System.out.print((arguments.get(i)) + " ");
-                columnCount++;
-              }
-              System.out.println();
+              Print.text(arguments);
             }
             if ((arguments.get(1)).equals("FILE")) //Print all contents function.      	
             {
-              currentFile = new File((arguments.get(2)) + ".csv");
-              String fileContents = Files.readString(Paths.get(currentFile.getName()));
-              System.out.print(fileContents);
-              System.out.println();
-              currentFile = null;
-            }
-            //Code for functions
-
-  
+              Print.file(arguments);
+            }  
             break;
           case "EDIT": 
             if ((arguments.get(1)).equals("FILE"))     	
               {
-                currentFile = new File((arguments.get(2)) + ".csv");
-                BufferedReader inEdit = new BufferedReader(new FileReader(currentFile.getName())); 
-                if ((arguments.get(3)).equals("COLUMNS"))
-                {
-                  if ((arguments.get(4)).equals("ADD"))
-                  {
-                    int columnsToAdd = 0;
-                    String columnsString = inEdit.readLine();
-                    PrintWriter outEdit = new PrintWriter(new FileWriter(currentFile.getName()));
-                    for (int i = 5; i < arguments.size(); i++)
-                    {
-                      columnsString += ("," + (arguments.get(i)));
-                      columnsToAdd++;
-                    }
-                    ArrayList<String> fileLines = new ArrayList<String>();
-                    fileLines.add(columnsString);
-                    String emptyCells = "";
-                    for (int i = 0; i < columnsToAdd; i++)
-                    {
-                      emptyCells+=",0";
-                    }
-                    while(inEdit.ready())
-                    {
-                      fileLines.add(inEdit.readLine()+emptyCells);
-                    }
-                    for (int i = 0; i < fileLines.size(); i++)
-                    {
-                      outEdit.println(fileLines.get(i));
-                    }
-                    outEdit.close();
-                  }
-                  if ((arguments.get(4)).equals("DELETE"))
-                  {
-
-                  }
-                }
-                if ((arguments.get(3)).equals("ROWS"))
-                {
-                  if ((arguments.get(4)).equals("ADD"))
-                  {
-
-                  }
-                  if ((arguments.get(4)).equals("DELETE"))
-                  {
-
-                  }
-                }
-                if ((arguments.get(3)).equals("ROWS") == false && (arguments.get(3)).equals("COLUMNS") == false)
-                {
-                  int columnPointer = Integer.parseInt(arguments.get(3));
-                  int rowPointer = Integer.parseInt(arguments.get(4));
-
-                  ArrayList<String> fileLines = new ArrayList<String>();
-                  for (int i = 0; i <= rowPointer; i++)
-                  {
-                    fileLines.add(inEdit.readLine());
-                  }
-                  StringTokenizer tokenizerEdit = new StringTokenizer(fileLines.get(rowPointer), ",");
-                  ArrayList<String> rowElements = new ArrayList<String>();
-                  while(tokenizerEdit.hasMoreTokens())
-                  {
-                    rowElements.add(tokenizerEdit.nextToken());
-                  }
-                  String cellItem = "";
-                  for (int i = 5; i < arguments.size()-1; i++)
-                  {
-                    cellItem += (arguments.get(i)).replace(',',' ') + " ";
-                  }
-                  cellItem += (arguments.get(arguments.size()-1)).replace(',',' ');
-                  rowElements.set(columnPointer, cellItem);
-                  String editedLine = "";
-                  for (int i = 0; i < rowElements.size()-1; i++)
-                  {
-                    editedLine += rowElements.get(i) + ",";
-                  }
-                  editedLine += rowElements.get(rowElements.size()-1);
-                  fileLines.set(rowPointer,editedLine);
-                  while(inEdit.ready())
-                  {
-                    fileLines.add(inEdit.readLine());
-                  }
-                  PrintWriter outEdit = new PrintWriter(new FileWriter(currentFile.getName()));
-                  for (int i = 0; i < fileLines.size(); i++)
-                  {
-                    outEdit.println(fileLines.get(i));
-                  }
-                  outEdit.close();
-                }
+                Edit.file(arguments);
               }
               break;
           case "ADD": 
-            out.flush();
-            BufferedReader inEdit = new BufferedReader(new FileReader(currentFile.getName())); 
-            int columnPointer = Integer.parseInt(arguments.get(1));
-            int rowPointer = Integer.parseInt(arguments.get(2));
-            ArrayList<String> fileLines = new ArrayList<String>();
-            for (int i = 0; i <= rowPointer; i++)
-            {
-              fileLines.add(inEdit.readLine());
-            }
-            StringTokenizer tokenizerEdit = new StringTokenizer(fileLines.get(rowPointer), ",");
-            ArrayList<String> rowElements = new ArrayList<String>();
-            while(tokenizerEdit.hasMoreTokens())
-            {
-              rowElements.add(tokenizerEdit.nextToken());
-            }
-            String cellItem = "";
-            for (int i = 3; i < arguments.size()-1; i++)
-            {
-              cellItem += (arguments.get(i)).replace(',',' ') + " ";
-            }
-            cellItem += (arguments.get(arguments.size()-1)).replace(',',' ');
-            rowElements.set(columnPointer, cellItem);
-            String editedLine = "";
-            for (int i = 0; i < rowElements.size()-1; i++)
-            {
-              editedLine += rowElements.get(i) + ",";
-            }
-            editedLine += rowElements.get(rowElements.size()-1);
-            fileLines.set(rowPointer,editedLine);
-            while(inEdit.ready())
-            {
-              fileLines.add(inEdit.readLine());
-            }
-            PrintWriter outEdit = new PrintWriter(new FileWriter(currentFile.getName()));
-            for (int i = 0; i < fileLines.size(); i++)
-            {
-              outEdit.println(fileLines.get(i));
-            }
-            outEdit.close();
+            Add.fallBack(arguments);
             break;
           case "DELETE": //Delete functions
             if ((arguments.get(1)).equals("FILE")) //Print all contents function.      	
             {
-              currentFile = new File((arguments.get(2)) + ".csv");
-              currentFile.delete();
-              currentFile = null;
+              Delete.file(arguments);
             }
-            //Code for functions
-
-
             break;
           case "HELP": //Prints function information
-            System.out.println();
-            System.out.println("CREATE [options] [args...] ---- Creates item dependent on option and args.");
-            System.out.println("Where options include:");
-            System.out.println("\tFILE [filename] ---- Creates empty file.");
-            System.out.println("\tCOLUMNS [column1 column2 ... columni] ---- Creates column names.");
-            System.out.println("\tROWS [number} ---- Creates rows. must create columns before rows.");
-            System.out.println();
-            System.out.println("PULL [options] [args...] ---- Sets current method of input/output.");
-            System.out.println("Where options include:");
-            System.out.println("\tFILE [filename] ---- Set dictated file to manipulate.");
-            System.out.println("\tREPL ---- Set command-line as method of command input.");
-            System.out.println();
-            System.out.println("DROP [options] ---- Nulls current method of input/output.");
-            System.out.println("Where options include:");
-            System.out.println("\tFILE ---- Nulls dictated file to manipulate.");
-            System.out.println("\tREPL ---- Ends command-line input.");
-            System.out.println();
-            System.out.println("PRINT [option] [arg] ---- Outputs item in command-line dependent on option and arg.");
-            System.out.println("Where options include:");
-            System.out.println("\tFILE [filename] ---- Outputs contents of file.");
-            System.out.println("\tTEXT [text] ---- Outputs text.");
-            System.out.println();
-            System.out.println("COMMENT [text] ---- Creates comment on single line.");
-            System.out.println();
-       
-            //Code for functions
-
-  
+            Help.fallBack();
             break;
           default:
-            System.out.println("Error on line " + lineNumber);
+            Terminal.error();
         }
       }
     }
