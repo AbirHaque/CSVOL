@@ -12,7 +12,6 @@ The interpreter is written in entirely Java. All development occurred on Repl.it
 We plan on moving meeting notes to a group website in the future. General meeting notes for all of Wichita CPU's operations can be found here: https://docs.google.com/document/d/1penokzeQKJ7PXM5JvUvn8pT_uso4QuSFwjQhdeqkrpU/edit.
 
 Will implement the following functions:
-- Delete contents of file
 - Maybe Turing completeness?
 
 Current functionality:
@@ -22,6 +21,7 @@ Current functionality:
 - Drop existing file
 - Print contents of file
 - Edit contents of file
+- Delete contents of file
 
 More additions will be decided upon and listed during general meetings.
 

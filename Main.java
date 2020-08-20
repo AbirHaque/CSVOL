@@ -1,29 +1,34 @@
 import java.io.*;
 import java.util.*;
-import java.nio.channels.FileChannel;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class Main
 {
+    public static String inString;
     public static BufferedReader in;
     public static PrintWriter out;
     public static File currentFile;
     public static int lineNumber;
+    public static int mainLineNumber;
     public static int columnCount;
     public static int rowCount;
+    public static int forMarker;
+    public static int forMax;
     public static boolean isCommand;
-
+    
   public static void main(String[] args) throws Exception
   {
     Terminal.start();
 
-    in = new BufferedReader(new FileReader("main.csvol"));
+    inString = "main.csvol";
+    in = new BufferedReader(new FileReader(inString));
     out = null;
     currentFile = null;
     lineNumber = 0;
+    mainLineNumber = 0;
     columnCount = 0;
     rowCount = 0;
+    forMarker = 0;
+    forMax = 0;
     isCommand = false;
 
     while(in.ready()||isCommand==true)
@@ -31,6 +36,10 @@ public class Main
       if (isCommand == false)
       {
         lineNumber++;
+        if (inString.equals("main.csvol"))
+        {
+          mainLineNumber++;
+        }
       }
       String line = in.readLine();
       if (line.equals("") == false)
@@ -44,6 +53,20 @@ public class Main
         switch (arguments.get(0))
         {
           case "COMMENT": //Add comments in code
+            break;
+          case "IF":
+            if ((arguments.get(1)).equals("FILE"))  
+            {
+              If.file(arguments);
+            }
+            break;
+          case "FOR":
+            if ((arguments.get(1)).equals("MAX"))  
+            {
+              For.max(arguments);
+            }
+          case "LOOP": //Prints function information
+            Loop.fallBack();
             break;
           case "CREATE": //Create functions
             if ((arguments.get(1)).equals("FILE")) //Create file function       	
@@ -67,6 +90,14 @@ public class Main
             if ((arguments.get(1)).equals("REPL")) //Pull command function      	
             {
               Pull.repl();            
+            }
+            if ((arguments.get(1)).equals("OBJECT"))   	
+            {
+              Pull.object(arguments);            
+            }
+            if ((arguments.get(1)).equals("MAIN"))   	
+            {
+              Pull.main();
             }
             break;
           case "DROP": //Drop function

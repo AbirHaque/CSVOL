@@ -1,8 +1,6 @@
 import java.io.*;
 import java.util.*;
-import java.nio.channels.FileChannel;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.file.*;
 
 public class Pull
 {
@@ -26,5 +24,28 @@ public class Pull
     Main.isCommand = true;     
     Main.columnCount = 0;
     Main.rowCount = 0; 
+  }
+  public static void object(ArrayList<String> args) throws Exception
+  {
+    ArrayList<String> arguments = args;
+    Main.inString = arguments.get(2) + ".csvol";
+    Main.in = new BufferedReader(new FileReader(Main.inString)); 
+    Main.isCommand = false;     
+    Main.columnCount = 0;
+    Main.rowCount = 0; 
+    Main.lineNumber = 0;
+  }
+  public static void main() throws Exception
+  {
+    Main.inString = "main.csvol";
+    Main.in = new BufferedReader(new FileReader(Main.inString)); 
+    for (int i = 0; i < Main.mainLineNumber; i++) 
+    {
+      (Main.in).readLine();
+    }
+    Main.isCommand = false;   
+    Main.columnCount = 0;
+    Main.rowCount = 0;
+    Main.lineNumber = 0;
   }
 }

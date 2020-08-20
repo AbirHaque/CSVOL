@@ -1,8 +1,5 @@
 import java.io.*;
 import java.util.*;
-import java.nio.channels.FileChannel;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class Print
 {
@@ -19,9 +16,17 @@ public class Print
   {
     ArrayList<String> arguments = args;
     Main.currentFile = new File((arguments.get(2)) + ".csv");
-    String fileContents = Files.readString(Paths.get((Main.currentFile).getName()));
-    System.out.print(fileContents);
-    System.out.println();
+    BufferedReader inEdit = new BufferedReader(new FileReader((Main.currentFile).getName())); 
+    ArrayList<String> fileLines = new ArrayList<String>();
+    while(inEdit.ready())
+    {
+      fileLines.add(inEdit.readLine());
+    }
+    for (int i = 0; i < fileLines.size(); i++)
+    {
+      System.out.println(fileLines.get(i));
+    }
+    inEdit.close();    
     Main.currentFile = null;
   }
 }

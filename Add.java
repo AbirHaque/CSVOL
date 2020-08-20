@@ -1,15 +1,11 @@
 import java.io.*;
 import java.util.*;
-import java.nio.channels.FileChannel;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class Add
 {
   public static void fallBack(ArrayList<String> args) throws Exception
   {
     ArrayList<String> arguments = args;
-    (Main.out).flush();
     BufferedReader inEdit = new BufferedReader(new FileReader((Main.currentFile).getName())); 
     int columnPointer = Integer.parseInt(arguments.get(1));
     int rowPointer = Integer.parseInt(arguments.get(2));

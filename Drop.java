@@ -1,8 +1,5 @@
 import java.io.*;
 import java.util.*;
-import java.nio.channels.FileChannel;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class Drop
 {
@@ -17,7 +14,7 @@ public class Drop
   public static void repl() throws Exception
   {
     Main.isCommand = false;
-    Main.in = new BufferedReader(new FileReader("main.csvol"));           
+    Main.in = new BufferedReader(new FileReader(Main.inString));           
     for (int i = 0; i < Main.lineNumber; i++) 
     {
       (Main.in).readLine();

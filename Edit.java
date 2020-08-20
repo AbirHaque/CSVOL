@@ -1,8 +1,5 @@
 import java.io.*;
 import java.util.*;
-import java.nio.channels.FileChannel;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class Edit
 {
@@ -59,7 +56,54 @@ public class Edit
     }
     if ((arguments.get(4)).equals("DELETE"))
     {
-      
+      int minDomain = Integer.parseInt(arguments.get(5));
+      int maxDomain = Integer.parseInt(arguments.get(6));
+      String columnsString = inEdit.readLine();
+      StringTokenizer tokenizerEdit = new StringTokenizer(columnsString, ",");
+      ArrayList<String> columnNames = new ArrayList<String>();
+      while(tokenizerEdit.hasMoreTokens())
+      {
+        columnNames.add(tokenizerEdit.nextToken());
+      }
+      for (int i = maxDomain; i >= minDomain; i--)
+      {
+        columnNames.remove(i);
+      }
+      String newColumns = "";
+      for (int i = 0; i < columnNames.size()-1; i++)
+      {
+        newColumns+=(columnNames.get(i)+",");
+      }
+      newColumns+=(columnNames.get(columnNames.size()-1));
+      ArrayList<String> fileLines = new ArrayList<String>();
+      fileLines.add(newColumns);
+      while(inEdit.ready())
+      {
+        tokenizerEdit = new StringTokenizer(inEdit.readLine(), ",");
+        columnNames = new ArrayList<String>();
+        while(tokenizerEdit.hasMoreTokens())
+        {
+          columnNames.add(tokenizerEdit.nextToken());
+        }
+        for (int i = maxDomain; i >= minDomain; i--)
+        {
+          columnNames.remove(i);
+        }
+        newColumns = "";
+        for (int i = 0; i < columnNames.size()-1; i++)
+        {
+          newColumns+=(columnNames.get(i)+",");
+        }
+        newColumns+=(columnNames.get(columnNames.size()-1));
+        fileLines.add(newColumns);
+      }      
+      PrintWriter outEdit = new PrintWriter(new FileWriter((Main.currentFile).getName()));
+      for (int i = 0; i < fileLines.size(); i++)
+      {
+        outEdit.println(fileLines.get(i));
+      }
+      inEdit.close();
+      outEdit.close();
     }
   }
   public static void rows(ArrayList<String> args) throws Exception
@@ -96,7 +140,28 @@ public class Edit
     }
     if ((arguments.get(4)).equals("DELETE"))
     {
-
+      int minRange = Integer.parseInt(arguments.get(5));
+      int maxRange = Integer.parseInt(arguments.get(6));
+      ArrayList<String> fileLines = new ArrayList<String>();
+      for (int i = 0; i < minRange; i++)
+      {
+        fileLines.add(inEdit.readLine());
+      }
+      for (int i = minRange; i <= maxRange; i++)
+      {
+        inEdit.readLine();
+      }
+      while(inEdit.ready())
+      {
+        fileLines.add(inEdit.readLine());
+      }
+      PrintWriter outEdit = new PrintWriter(new FileWriter((Main.currentFile).getName()));
+      for (int i = 0; i < fileLines.size(); i++)
+      {
+        outEdit.println(fileLines.get(i));
+      }
+      inEdit.close();
+      outEdit.close();
     }
   }
   public static void fallBack(ArrayList<String> args) throws Exception

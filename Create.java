@@ -1,8 +1,5 @@
 import java.io.*;
 import java.util.*;
-import java.nio.channels.FileChannel;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 public class Create
 {
@@ -37,5 +34,6 @@ public class Create
       (Main.out).println();
       Main.rowCount++;
     }
+    (Main.out).close();
   }
 }

@@ -2,7 +2,7 @@ public class Terminal
 {
   public static void start()
   {
-    System.out.println("CSVOL 1.0.0");
+    System.out.println("CSVOL 0.3.1");
     System.out.println("Created by the Wichita Computer Programmers' Union");
     System.out.println();
     System.out.println("\tType \"PULL REPL\" in the main.csvol file to instruct through the command-line.");
@@ -16,6 +16,11 @@ public class Terminal
   }
   public static void error()
   {
-    System.out.println("Error on line " + Main.lineNumber);
+    int errorLine = Main.lineNumber+1;
+    System.out.println("Error on line " + errorLine + " in " + Main.inString);
+  }
+  public static void forLater()
+  {
+    System.out.println("For loops currently not functional in REPL environment.");
   }
 }
