@@ -40,13 +40,13 @@ The current members of the [Wichita Computer Programmers' Union](https://repl.it
 Feel free to get in touch by sending an email to abir.haque.usa@gmail.com.
 
 #### Project Links
-Main - https://repl.it/@wichitacpu/CSVOL
-Backup - https://github.com/AbirHaque/CSVOL
+- Main - https://repl.it/@wichitacpu/CSVOL
+- Backup - https://github.com/AbirHaque/CSVOL
 
 #### Sources
-(1) - https://davidlyness.com/the-functional-and-performance-differences-of-sed-awk-and-other-unix-parsing-utilities
-(2) - https://www.cs.rit.edu/~afb/20013/plc/slides/perlintro-03.html
-(3) - http://sed.sourceforge.net/sedfaq6.html
-(4) - https://unix.stackexchange.com/questions/36949/addition-with-sed
-(5) - http://web.eecs.utk.edu/~bvanderz/cs460/notes/perl/perl1.html#title3
-(6) - https://data-flair.training/blogs/advantages-and-disadvantages-of-python/
+- (1) - https://davidlyness.com/the-functional-and-performance-differences-of-sed-awk-and-other-unix-parsing-utilities
+- (2) - https://www.cs.rit.edu/~afb/20013/plc/slides/perlintro-03.html
+- (3) - http://sed.sourceforge.net/sedfaq6.html
+- (4) - https://unix.stackexchange.com/questions/36949/addition-with-sed
+- (5) - http://web.eecs.utk.edu/~bvanderz/cs460/notes/perl/perl1.html#title3
+- (6) - https://data-flair.training/blogs/advantages-and-disadvantages-of-python/
