@@ -1,4 +1,4 @@
-﻿﻿# CSVOL
+# CSVOL
 Character Separated Value Organizer Language, or CSVOL (\kasväl\\), is an interpreted language that specializes in reporting and manipulating delimited files.
 
 If you want to start a new CSVOL project, please clear all contents of the main.csvol file. The main.csvol file is where you can write CSVOL driver code for all additional modules. Alternatively, you may invoke CSVOL's REPL environment by writing PULL REPL to a blank main.csvol file. Please note that the REPL environment is still experimental, so some comands may not function as properly as they would in a normal CSVOL file.
@@ -36,7 +36,6 @@ Current features:
 - Modularization
 - For loops
 - Conditional statements
-
 
 More additions will be decided upon and listed during general meetings.
 
