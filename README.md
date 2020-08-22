@@ -1,3 +1,4 @@
+﻿![](Assets/logo.png)
 # CSVOL
 Character Separated Value Organizer Language, or CSVOL (\kasväl\\), is an interpreted language that specializes in reporting and manipulating delimited files.
 
