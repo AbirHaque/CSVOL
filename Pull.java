@@ -9,6 +9,7 @@ public class Pull
     ArrayList<String> arguments = args;
     Main.currentFile = new File((arguments.get(2)) + ".csv");
     String fileContents = Files.readString(Paths.get((Main.currentFile).getName()));
+
     Main.out = new PrintWriter(new FileWriter((arguments.get(2)) + ".csv"));
     if (Main.isCommand == true)
     {
@@ -25,7 +26,7 @@ public class Pull
     Main.columnCount = 0;
     Main.rowCount = 0; 
   }
-  public static void object(ArrayList<String> args) throws Exception
+  public static void module(ArrayList<String> args) throws Exception
   {
     ArrayList<String> arguments = args;
     Main.inString = arguments.get(2) + ".csvol";

@@ -14,7 +14,7 @@ public class Add
     {
       fileLines.add(inEdit.readLine());
     }
-    StringTokenizer tokenizerEdit = new StringTokenizer(fileLines.get(rowPointer), ",");
+    StringTokenizer tokenizerEdit = new StringTokenizer(fileLines.get(rowPointer), Main.delimeter);
     ArrayList<String> rowElements = new ArrayList<String>();
     while(tokenizerEdit.hasMoreTokens())
     {
@@ -23,14 +23,14 @@ public class Add
     String cellItem = "";
     for (int i = 3; i < arguments.size()-1; i++)
     {
-      cellItem += (arguments.get(i)).replace(',',' ') + " ";
+      cellItem += (arguments.get(i)).replace(Main.delimeter," ") + " ";
     }
-    cellItem += (arguments.get(arguments.size()-1)).replace(',',' ');
+    cellItem += (arguments.get(arguments.size()-1)).replace(Main.delimeter," ");
     rowElements.set(columnPointer, cellItem);
     String editedLine = "";
     for (int i = 0; i < rowElements.size()-1; i++)
     {
-      editedLine += rowElements.get(i) + ",";
+      editedLine += rowElements.get(i) + Main.delimeter;
     }
     editedLine += rowElements.get(rowElements.size()-1);
     fileLines.set(rowPointer,editedLine);

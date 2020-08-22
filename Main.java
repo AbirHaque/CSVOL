@@ -14,6 +14,8 @@ public class Main
     public static int forMarker;
     public static int forMax;
     public static boolean isCommand;
+    public static String validation;
+    public static String delimeter;
     
   public static void main(String[] args) throws Exception
   {
@@ -30,6 +32,8 @@ public class Main
     forMarker = 0;
     forMax = 0;
     isCommand = false;
+    validation = "Not in conditional statement.";
+    delimeter = ",";
 
     while(in.ready()||isCommand==true)
     {
@@ -59,6 +63,9 @@ public class Main
             {
               If.file(arguments);
             }
+            break;
+          case "CONDITIONAL":
+            Conditional.fallBack();
             break;
           case "FOR":
             if ((arguments.get(1)).equals("MAX"))  
@@ -91,9 +98,9 @@ public class Main
             {
               Pull.repl();            
             }
-            if ((arguments.get(1)).equals("OBJECT"))   	
+            if ((arguments.get(1)).equals("MODULE"))   	
             {
-              Pull.object(arguments);            
+              Pull.module(arguments);            
             }
             if ((arguments.get(1)).equals("MAIN"))   	
             {
@@ -122,10 +129,14 @@ public class Main
             break;
           case "EDIT": 
             if ((arguments.get(1)).equals("FILE"))     	
-              {
-                Edit.file(arguments);
-              }
-              break;
+            {
+              Edit.file(arguments);
+            }
+            if ((arguments.get(1)).equals("DELIMETER"))     	
+            {
+              Edit.delimeter(arguments);
+            }
+            break;
           case "ADD": 
             Add.fallBack(arguments);
             break;

@@ -15,7 +15,7 @@ public class Create
     ArrayList<String> arguments = args;
     for (int i = 2; i < arguments.size()-1; i++)
     {
-      (Main.out).print((arguments.get(i)) + ",");
+      (Main.out).print((arguments.get(i)) + Main.delimeter);
       Main.columnCount++;
     }
     (Main.out).print((arguments.get(arguments.size()-1)));
@@ -28,7 +28,7 @@ public class Create
     {
       for (int k = 0; k < Main.columnCount; k++)
       {
-        (Main.out).print("0,");
+        (Main.out).print("0"+Main.delimeter);
       }
       (Main.out).print("0");
       (Main.out).println();

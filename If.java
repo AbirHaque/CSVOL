@@ -1,6 +1,8 @@
 import java.io.*;
 import java.util.*;
-
+/*
+  Need to organize this file.
+*/
 public class If
 {
   public static void file(ArrayList<String> args) throws Exception
@@ -20,7 +22,7 @@ public class If
       {
         inEdit.readLine();
       }
-      StringTokenizer tokenizerEdit = new StringTokenizer(inEdit.readLine(), ",");
+      StringTokenizer tokenizerEdit = new StringTokenizer(inEdit.readLine(), Main.delimeter);
       ArrayList<String> cellStrings = new ArrayList<String>();
       while(tokenizerEdit.hasMoreTokens())
       {
@@ -41,7 +43,7 @@ public class If
             {
               inEdit.readLine();
             }
-            tokenizerEdit = new StringTokenizer(inEdit.readLine(), ",");
+            tokenizerEdit = new StringTokenizer(inEdit.readLine(), Main.delimeter);
             cellStrings = new ArrayList<String>();
             while(tokenizerEdit.hasMoreTokens())
             {
@@ -73,7 +75,7 @@ public class If
             {
               inEdit.readLine();
             }
-            tokenizerEdit = new StringTokenizer(inEdit.readLine(), ",");
+            tokenizerEdit = new StringTokenizer(inEdit.readLine(), Main.delimeter);
             cellStrings = new ArrayList<String>();
             while(tokenizerEdit.hasMoreTokens())
             {
@@ -96,22 +98,37 @@ public class If
     {
       if (comparison1.equals(comparison2))
       {
-        System.out.println("TRUE");
+        Main.validation = "true";
       }
       else
       {
-        System.out.println("FALSE");
+        Main.validation = "false";
       }
     }
     if (context == false)
     {
       if (comparison1.equals(comparison2) == false)
       {
-        System.out.println("TRUE");
+        Main.validation = "true";
       }
       else
       {
-        System.out.println("FALSE");
+        Main.validation = "false";
+      }
+    }
+    if ((Main.validation).equals("false"))
+    {
+      //Skip to CONDITIONAL
+      boolean loop = true;
+      while (loop == true)
+      {
+        String line = (Main.in).readLine();
+        Main.lineNumber++;
+        if(line.equals("CONDITIONAL"))
+        {
+          loop = false;
+          Main.validation = "Not in conditional statement.";
+        }
       }
     }
   }
