@@ -53,6 +53,9 @@ Feel free to get in touch by sending an email to abir.haque.usa@gmail.com.
 - Main - https://repl.it/@wichitacpu/CSVOL
 - Backup - https://github.com/AbirHaque/CSVOL
 
+#### License
+CSVOL is protected under the GNU General Public License v3.0. Please see the LICENSE file to view the license.
+
 #### Sources
 - (1) - https://davidlyness.com/the-functional-and-performance-differences-of-sed-awk-and-other-unix-parsing-utilities
 - (2) - https://www.cs.rit.edu/~afb/20013/plc/slides/perlintro-03.html
