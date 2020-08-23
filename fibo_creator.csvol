@@ -1,7 +1,7 @@
 COMMENT Creates variables for the fibo.csvol module.
 
-CREATE FILE Examples/fibo
-PULL FILE Examples/fibo
+CREATE FILE fibo
+PULL FILE fibo
   CREATE COLUMNS TERM ITERATIONS
   CREATE ROWS 3
   COMMENT 1st Term
@@ -13,6 +13,6 @@ PULL FILE Examples/fibo
   COMMENT Iterations
   ADD 1 1 10
   DROP FILE
-PRINT FILE Examples/fibo
+PRINT FILE fibo
 
 PULL MAIN
