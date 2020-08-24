@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.*;
-import java.nio.file.*;
 
 public class Pull
 {
@@ -8,12 +7,21 @@ public class Pull
   {
     ArrayList<String> arguments = args;
     Main.currentFile = new File((arguments.get(2)) + ".csv");
-    String fileContents = Files.readString(Paths.get((Main.currentFile).getName()));
+    BufferedReader inEdit = new BufferedReader(new FileReader((Main.currentFile).getName())); 
+    ArrayList<String> fileLines = new ArrayList<String>();
+    while(inEdit.ready())
+    {
+      fileLines.add(inEdit.readLine());
+    }
+    inEdit.close(); 
 
     Main.out = new PrintWriter(new FileWriter((arguments.get(2)) + ".csv"));
     if (Main.isCommand == true)
     {
-      (Main.out).print(fileContents);
+      for (int i = 0; i < fileLines.size(); i++)
+      {
+        (Main.out).println(fileLines.get(i));
+      }
     }
     Main.columnCount = 0;
     Main.rowCount = 0;

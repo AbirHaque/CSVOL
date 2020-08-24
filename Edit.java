@@ -7,11 +7,6 @@ public class Edit
 {
   public static BufferedReader inEdit;
   
-  public static void delimeter(ArrayList<String> args) throws Exception
-  {
-    ArrayList<String> arguments = args;
-    Main.delimeter = arguments.get(2);
-  }
   public static void file(ArrayList<String> args) throws Exception
   {
     ArrayList<String> arguments = args;

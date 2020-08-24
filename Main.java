@@ -16,6 +16,7 @@ public class Main
     public static boolean isCommand;
     public static String validation;
     public static String delimeter;
+    public static ArrayList<Class> importedCommands;
     
   public static void main(String[] args) throws Exception
   {
@@ -34,6 +35,7 @@ public class Main
     isCommand = false;
     validation = "Not in conditional statement.";
     delimeter = ",";
+    importedCommands = new ArrayList<Class>();
 
     while(in.ready()||isCommand==true)
     {
@@ -54,103 +56,172 @@ public class Main
         {
           arguments.add(tokenizer.nextToken());
         }
-        switch (arguments.get(0))
+        try
         {
-          case "COMMENT": //Add comments in code
-            break;
-          case "IF":
-            if ((arguments.get(1)).equals("FILE"))  
-            {
-              If.file(arguments);
-            }
-            break;
-          case "CONDITIONAL":
-            Conditional.fallBack();
-            break;
-          case "FOR":
-            if ((arguments.get(1)).equals("MAX"))  
-            {
-              For.max(arguments);
-            }
-          case "LOOP": //Prints function information
-            Loop.fallBack();
-            break;
-          case "CREATE": //Create functions
-            if ((arguments.get(1)).equals("FILE")) //Create file function       	
-            {
-              Create.file(arguments);
-            }
-            if ((arguments.get(1)).equals("COLUMNS")) //Create column function       	
-            {
-              Create.columns(arguments);
-            }
-            if ((arguments.get(1)).equals("ROWS")) //Create row function       	
-            {
-              Create.rows(arguments);
-            }
-            break;
-          case "PULL": //Pull functions
-            if ((arguments.get(1)).equals("FILE")) //Pull existing file function      	
-            {
-              Pull.file(arguments);
-            }
-            if ((arguments.get(1)).equals("REPL")) //Pull command function      	
-            {
-              Pull.repl();            
-            }
-            if ((arguments.get(1)).equals("MODULE"))   	
-            {
-              Pull.module(arguments);            
-            }
-            if ((arguments.get(1)).equals("MAIN"))   	
-            {
-              Pull.main();
-            }
-            break;
-          case "DROP": //Drop function
-            if ((arguments.get(1)).equals("FILE")) //Drop current file function      	
-            {
-              Drop.file();
-            }
-            if ((arguments.get(1)).equals("REPL")) //Drop command function      	
-            {
-              Drop.repl();
-            }
-            break;
-          case "PRINT": //Print functions
-            if ((arguments.get(1)).equals("TEXT")) //Print text function    	
-            {
-              Print.text(arguments);
-            }
-            if ((arguments.get(1)).equals("FILE")) //Print all contents function.      	
-            {
-              Print.file(arguments);
-            }  
-            break;
-          case "EDIT": 
-            if ((arguments.get(1)).equals("FILE"))     	
-            {
-              Edit.file(arguments);
-            }
-            if ((arguments.get(1)).equals("DELIMETER"))     	
-            {
-              Edit.delimeter(arguments);
-            }
-            break;
-          case "ADD": 
-            Add.fallBack(arguments);
-            break;
-          case "DELETE": //Delete functions
-            if ((arguments.get(1)).equals("FILE")) //Print all contents function.      	
-            {
-              Delete.file(arguments);
-            }
-            break;
-          case "HELP": //Prints function information
-            Help.fallBack();
-            break;
-          default:
-            Terminal.error();
+          switch (arguments.get(0))
+          {
+            case "COMMENT": //Add comments in code
+              break;
+            case "IMPORT":
+              if ((arguments.get(1)).equals("COMMAND"))  
+              {
+                Import.command(arguments);
+              }
+              if ((arguments.get(1)).equals("MODULE"))  
+              {
+                Import.module(arguments);
+              }
+              if ((arguments.get(1)).equals("FILE"))  
+              {
+                Import.file(arguments);
+              }
+              break;
+            case "IMPORTED":
+              Imported.fallBack(arguments);
+              break;
+            case "IF":
+              if (isCommand == true)
+              {
+                Terminal.disabled();
+              }
+              else
+              {
+                if ((arguments.get(1)).equals("FILE"))  
+                {
+                  If.file(arguments);
+                }
+              }
+              break;
+            case "CONDITIONAL":
+              if (isCommand == true)
+              {
+                Terminal.disabled();
+              }
+              else
+              {
+                Conditional.fallBack();
+              }
+              break;
+            case "FOR":
+              if (isCommand == true)
+              {
+                Terminal.disabled();
+              }
+              else
+              {
+                if ((arguments.get(1)).equals("MAX"))  
+                {
+                  For.max(arguments);
+                }
+              }
+            case "LOOP":
+              if (isCommand == true)
+              {
+                Terminal.disabled();
+              }
+              else
+              {
+                Loop.fallBack();
+              }
+              break;
+            case "CREATE": //Create functions
+              if ((arguments.get(1)).equals("FILE")) //Create file function       	
+              {
+                Create.file(arguments);
+              }
+              if ((arguments.get(1)).equals("COLUMNS")) //Create column function       	
+              {
+                Create.columns(arguments);
+              }
+              if ((arguments.get(1)).equals("ROWS")) //Create row function       	
+              {
+                Create.rows(arguments);
+              }
+              break;
+            case "PULL": //Pull functions
+              if ((arguments.get(1)).equals("FILE")) //Pull existing file function      	
+              {
+                Pull.file(arguments);
+              }
+              if ((arguments.get(1)).equals("REPL")) //Pull command function      	
+              {
+                if (isCommand == true)
+                {
+                  Terminal.disabled();
+                }
+                else
+                {
+                  Pull.repl();
+                }           
+              }
+              if ((arguments.get(1)).equals("MODULE"))   	
+              {
+                Pull.module(arguments);            
+              }
+              if ((arguments.get(1)).equals("MAIN"))   	
+              {
+                if (isCommand == true)
+                {
+                  Terminal.disabled();
+                }
+                else
+                {
+                  Pull.main();
+                }
+              }
+              break;
+            case "DROP": //Drop function
+              if ((arguments.get(1)).equals("FILE")) //Drop current file function      	
+              {
+                Drop.file();
+              }
+              if ((arguments.get(1)).equals("REPL")) //Drop command function      	
+              {
+                Drop.repl();
+              }
+              break;
+            case "PRINT": //Print functions
+              if ((arguments.get(1)).equals("TEXT")) //Print text function    	
+              {
+                Print.text(arguments);
+              }
+              if ((arguments.get(1)).equals("FILE")) //Print all contents function.      	
+              {
+                Print.file(arguments);
+              }  
+              break;
+            case "EDIT": 
+              if ((arguments.get(1)).equals("FILE"))     	
+              {
+                Edit.file(arguments);
+              }
+              break;
+            case "ADD": 
+              Add.fallBack(arguments);
+              break;
+            case "DELETE": //Delete functions
+              if ((arguments.get(1)).equals("FILE")) //Print all contents function.      	
+              {
+                Delete.file(arguments);
+              }
+              break;
+            case "HELP": //Prints function information
+              Help.fallBack();
+              break;
+            default:
+              if (isCommand == true)
+              {
+                Terminal.disabled();
+              }
+              else
+              {
+                Terminal.error();
+              }
+          }
+        }
+        catch(Exception e)
+        {
+          Terminal.error();
         }
       }
     }
@@ -161,6 +232,11 @@ public class Main
     if (out != null)
     {
       out.close();
+    }
+    for (int i = importedCommands.size()-1; i >= 0; i--)
+    {
+      File commandToDelete = new File((importedCommands.get(i)).getName() + ".java");
+      commandToDelete.delete();
     }
   }
 }
