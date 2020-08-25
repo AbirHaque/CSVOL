@@ -4,7 +4,7 @@ public class Terminal
   {
     System.out.println("CSVOL Copyright (C) 2020 Abir Haque.");
     System.out.println();
-    System.out.println("CSVOL Version 0.8.0.");
+    System.out.println("CSVOL 0.8.1.");
     System.out.println("Created by the Wichita Computer Programmers' Union.");
     System.out.println();
     System.out.println("\tType \"PULL REPL\" in the main.csvol file to instruct through the command-line.");
@@ -23,14 +23,30 @@ public class Terminal
   }
   public static void terminalError()
   {
-    System.out.println("Invalid syntax.");
+    System.out.println("Invalid terminal input.");
   }
   public static void disabled()
   {
     System.out.println("The CSVOL REPL environment is still under development, so this command is disabled. You can still use this command in a CSVOL file.");
   }
+  public static void solLoading()
+  {
+    System.out.println("Please wait. Accessing CSVOL's Standard Online Library . . . ");
+  }
+  public static void directoryLoading()
+  {
+    System.out.println("Please wait. Accessing directory . . . ");
+  }
+  public static void libraryLoading()
+  {
+    System.out.println("Please wait. Importing library . . . ");
+  }
   public static void libraryError()
   {
     System.out.println("Failed to retrieve library");
+  }
+  public static void done()
+  {
+    System.out.println("Done!");
   }
 }

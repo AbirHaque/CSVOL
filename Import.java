@@ -10,14 +10,17 @@ public class Import
     String directory = "";
     switch(arguments.get(2))
     {
-      case "csvol-libs":
-        directory = "https://csvol-libs.wichitacpu.repl.co/commands/";
+      case "csvol-sol":
+        directory = "https://csvol-sol.wichitacpu.repl.co/commands/";
+        Terminal.solLoading();
         break;
       default:
         directory = arguments.get(2);
+        Terminal.directoryLoading();
     }
     try (BufferedInputStream inFile = new BufferedInputStream(new URL(directory+arguments.get(3)+".java").openStream());FileOutputStream outFile = new FileOutputStream(arguments.get(3)+".java")) 
     {
+        Terminal.libraryLoading();
         byte data[] = new byte[1024];
         int byteContent;
         while ((byteContent = inFile.read(data, 0, 1024)) != -1) {
@@ -26,6 +29,7 @@ public class Import
         outFile.close();
         Runtime.getRuntime().exec("javac " + arguments.get(3)+".java");
         (Main.importedCommands).add(Class.forName(arguments.get(3)));
+        Terminal.done();
     }
     catch (Exception e) 
     {
