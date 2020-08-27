@@ -2,18 +2,16 @@ public class Terminal
 {
   public static void start()
   {
+    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    System.out.println("CSVOL 0.9.1.");
     System.out.println("CSVOL Copyright (C) 2020 Abir Haque.");
-    System.out.println();
-    System.out.println("CSVOL 0.8.1.");
-    System.out.println("Created by the Wichita Computer Programmers' Union.");
-    System.out.println();
-    System.out.println("\tType \"PULL REPL\" in the main.csvol file to instruct through the command-line.");
-    System.out.println("\tAlternatively, you may write instructions in the main.csvol file.");
+    System.out.println("Developed by the Wichita Computer Programmers' Union.");
     System.out.println();
   }
   public static void repl()
   {
-    System.out.println("\tType \"HELP\" for a list of commands and their usage.");
+    System.out.println("REPL enabled.");
+    System.out.println("Type \"HELP\" for a list of commands and their usage.");
     System.out.println();
   }
   public static void error()
@@ -43,7 +41,7 @@ public class Terminal
   }
   public static void libraryError()
   {
-    System.out.println("Failed to retrieve library");
+    System.out.println("Failed to retrieve library. Please re-run your CSVOL program.");
   }
   public static void done()
   {

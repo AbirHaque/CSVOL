@@ -37,6 +37,14 @@ public class Main
     delimeter = ",";
     importedCommands = new ArrayList<Class>();
 
+    File mainFile = new File("main.csvol");
+    if (mainFile.length() == 0)
+    {
+      PrintWriter outInitialize = new PrintWriter(mainFile.getName());
+      outInitialize.println("PULL REPL");
+      outInitialize.close();
+    }
+
     while(in.ready()||isCommand==true)
     {
       if (isCommand == false)
@@ -50,6 +58,7 @@ public class Main
       String line = in.readLine();
       if (line.equals("") == false)
       {
+        line = (((((line).replace("{","")).replace("}","")).replace(",","")).replace("<~"," "));
         StringTokenizer tokenizer = new StringTokenizer(line, " ");
         ArrayList<String> arguments = new ArrayList<String>();
         while(tokenizer.hasMoreTokens())
@@ -236,7 +245,9 @@ public class Main
     for (int i = importedCommands.size()-1; i >= 0; i--)
     {
       File commandToDelete = new File((importedCommands.get(i)).getName() + ".java");
+      File commandClassToDelete = new File((importedCommands.get(i)).getName() + ".class");
       commandToDelete.delete();
+      commandClassToDelete.delete();
     }
   }
 }

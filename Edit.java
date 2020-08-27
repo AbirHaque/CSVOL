@@ -108,7 +108,7 @@ public class Edit
       outEdit.close();
     }
   }
-  public static void rows(ArrayList<String> args) throws Exception
+  public static void rows(ArrayList<String> args) throws Exception// 5:39pm 8/25
   {
     ArrayList<String> arguments = args;
     if ((arguments.get(4)).equals("ADD"))
@@ -127,7 +127,31 @@ public class Edit
       {
         fileLines.add(inEdit.readLine());
       }
-      int rowsToAdd = Integer.parseInt(arguments.get(5));
+      int rowsToAdd = 0;
+      if ((arguments.get(5)).equals("FILE"))
+      {
+        BufferedReader inFind = new BufferedReader(new FileReader((arguments.get(6))+".csv"));
+        if ((arguments.get(7)).equals("CELL"))  
+        {
+          int columnPointer = Integer.parseInt(arguments.get(8));
+          int rowPointer = Integer.parseInt(arguments.get(9));
+          for (int i = 0; i < rowPointer; i++)
+          {
+            inFind.readLine();
+          }
+          StringTokenizer tokenizerFind = new StringTokenizer(inFind.readLine(), Main.delimeter);
+          ArrayList<String> cellStrings = new ArrayList<String>();
+          while(tokenizerFind.hasMoreTokens())
+          {
+            cellStrings.add(tokenizerFind.nextToken());
+          }
+          rowsToAdd = Integer.parseInt(cellStrings.get(columnPointer));
+        }
+      }
+      else
+      {
+        rowsToAdd = Integer.parseInt(arguments.get(5));
+      }
       PrintWriter outEdit = new PrintWriter(new FileWriter((Main.currentFile).getName()));
       for (int i = 0; i < fileLines.size(); i++)
       {
@@ -169,9 +193,75 @@ public class Edit
   public static void cell(ArrayList<String> args) throws Exception
   {
     ArrayList<String> arguments = args;
-    int columnPointer = Integer.parseInt(arguments.get(4));
-    int rowPointer = Integer.parseInt(arguments.get(5));
 
+    int columnPointer = 0;
+    int rowPointer = 0;
+    try
+    {
+      columnPointer = Integer.parseInt(arguments.get(4));
+    }
+    catch(Exception e)
+    {
+      StringTokenizer tokenizerFind = new StringTokenizer(arguments.get(4), "#");
+      ArrayList<String> subArguments = new ArrayList<String>();
+      while(tokenizerFind.hasMoreTokens())
+      {
+        subArguments.add(tokenizerFind.nextToken());
+      }
+      if ((subArguments.get(0)).equals("FILE"))  
+      {
+        BufferedReader inFind = new BufferedReader(new FileReader((subArguments.get(1))+".csv"));
+        if ((subArguments.get(2)).equals("CELL"))  
+        {
+          int columnPointerFind = Integer.parseInt(subArguments.get(3));
+          int rowPointerFind = Integer.parseInt(subArguments.get(4));
+          for (int i = 0; i < rowPointerFind; i++)
+          {
+            inFind.readLine();
+          }
+          tokenizerFind = new StringTokenizer(inFind.readLine(), Main.delimeter);
+          ArrayList<String> cellStrings = new ArrayList<String>();
+          while(tokenizerFind.hasMoreTokens())
+          {
+            cellStrings.add(tokenizerFind.nextToken());
+          }
+          columnPointer = Integer.parseInt(cellStrings.get(columnPointerFind));
+        }
+      }
+    }
+    try
+    {
+      rowPointer = Integer.parseInt(arguments.get(5));
+    }
+    catch(Exception e)
+    {
+      StringTokenizer tokenizerFind = new StringTokenizer(arguments.get(5), "#");
+      ArrayList<String> subArguments = new ArrayList<String>();
+      while(tokenizerFind.hasMoreTokens())
+      {
+        subArguments.add(tokenizerFind.nextToken());
+      }
+      if ((subArguments.get(0)).equals("FILE"))  
+      {
+        BufferedReader inFind = new BufferedReader(new FileReader((subArguments.get(1))+".csv"));
+        if ((subArguments.get(2)).equals("CELL"))  
+        {
+          int columnPointerFind = Integer.parseInt(subArguments.get(3));
+          int rowPointerFind = Integer.parseInt(subArguments.get(4));
+          for (int i = 0; i < rowPointerFind; i++)
+          {
+            inFind.readLine();
+          }
+          tokenizerFind = new StringTokenizer(inFind.readLine(), Main.delimeter);
+          ArrayList<String> cellStrings = new ArrayList<String>();
+          while(tokenizerFind.hasMoreTokens())
+          {
+            cellStrings.add(tokenizerFind.nextToken());
+          }
+          rowPointer = Integer.parseInt(cellStrings.get(columnPointerFind));
+        }
+      }
+    }
     ArrayList<String> fileLines = new ArrayList<String>();
     for (int i = 0; i <= rowPointer; i++)
     {

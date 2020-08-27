@@ -11,7 +11,7 @@ public class Import
     switch(arguments.get(2))
     {
       case "csvol-sol":
-        directory = "https://csvol-sol.wichitacpu.repl.co/commands/";
+        directory = "https://csvol-docs.wichitacpu.repl.co/commands/";
         Terminal.solLoading();
         break;
       default:
@@ -27,13 +27,13 @@ public class Import
             outFile.write(data, 0, byteContent);
         }
         outFile.close();
-        Runtime.getRuntime().exec("javac " + arguments.get(3)+".java");
         (Main.importedCommands).add(Class.forName(arguments.get(3)));
         Terminal.done();
     }
     catch (Exception e) 
     {
       Terminal.libraryError();
+      System.exit(0);
     }
   }
   public static void module(ArrayList<String> args) throws Exception
@@ -42,8 +42,8 @@ public class Import
     String directory = "";
     switch(arguments.get(2))
     {
-      case "csvol-libs":
-        directory = "https://csvol-libs.wichitacpu.repl.co/modules/";
+      case "csvol-sol":
+        directory = "https://csvol-docs.wichitacpu.repl.co/modules/";
         break;
       default:
         directory = arguments.get(2);
@@ -60,6 +60,7 @@ public class Import
     catch (Exception e) 
     {
       Terminal.libraryError();
+      System.exit(0);
     }
   }
   public static void file(ArrayList<String> args) throws Exception
@@ -68,8 +69,8 @@ public class Import
     String directory = "";
     switch(arguments.get(2))
     {
-      case "csvol-libs":
-        directory = "https://csvol-libs.wichitacpu.repl.co/files/";
+      case "csvol-sol":
+        directory = "https://csvol-docs.wichitacpu.repl.co/files/";
         break;
       default:
         directory = arguments.get(2);
@@ -86,6 +87,7 @@ public class Import
     catch (Exception e) 
     {
       Terminal.libraryError();
+      System.exit(0);
     }
   }
 }
