@@ -23,17 +23,18 @@ public class Import
         Terminal.libraryLoading();
         byte data[] = new byte[1024];
         int byteContent;
-        while ((byteContent = inFile.read(data, 0, 1024)) != -1) {
+        while ((byteContent = inFile.read(data, 0, 1024)) != -1) 
+        {
             outFile.write(data, 0, byteContent);
         }
         outFile.close();
-        (Main.importedCommands).add(Class.forName(arguments.get(3)));
+        (Main.importedCommands).add(arguments.get(3));
+        Runtime.getRuntime().exec("javac " + arguments.get(3)+".java");
         Terminal.done();
     }
     catch (Exception e) 
     {
       Terminal.libraryError();
-      System.exit(0);
     }
   }
   public static void module(ArrayList<String> args) throws Exception
@@ -52,7 +53,8 @@ public class Import
     {
         byte data[] = new byte[1024];
         int byteContent;
-        while ((byteContent = inFile.read(data, 0, 1024)) != -1) {
+        while ((byteContent = inFile.read(data, 0, 1024)) != -1) 
+        {
             outFile.write(data, 0, byteContent);
         }
         outFile.close();
@@ -60,7 +62,6 @@ public class Import
     catch (Exception e) 
     {
       Terminal.libraryError();
-      System.exit(0);
     }
   }
   public static void file(ArrayList<String> args) throws Exception
@@ -79,7 +80,8 @@ public class Import
     {
         byte data[] = new byte[1024];
         int byteContent;
-        while ((byteContent = inFile.read(data, 0, 1024)) != -1) {
+        while ((byteContent = inFile.read(data, 0, 1024)) != -1) 
+        {
             outFile.write(data, 0, byteContent);
         }
         outFile.close();
@@ -87,7 +89,6 @@ public class Import
     catch (Exception e) 
     {
       Terminal.libraryError();
-      System.exit(0);
     }
   }
 }

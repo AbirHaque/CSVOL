@@ -18,6 +18,7 @@ public class Help
     System.out.println("\tFILE [filename] ---- Deletes file.");
     System.out.println();
     System.out.println("DROP [options] ---- Nulls current method of input/output.");
+    System.out.println("Where options include:");
     System.out.println("\tFILE ---- Ends file manipulation");
     System.out.println("\tREPL ---- Ends REPL input.");
     System.out.println();
@@ -59,6 +60,8 @@ public class Help
     System.out.println("\tREPL ---- Set command-line as method of command input.");
     System.out.println("\tMODULE [module name] ---- Set stated module as method of command input.");
     System.out.println("\tMAIN ---- Set main.csvol as method of command input.");
+    System.out.println();
+    System.out.println("See https://csvol-docs.wichitacpu.repl.co/docs.html for more details.");
     System.out.println();
   }
 }

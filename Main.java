@@ -3,21 +3,21 @@ import java.util.*;
 
 public class Main
 {
-    public static String inString;
-    public static BufferedReader in;
-    public static PrintWriter out;
-    public static File currentFile;
-    public static int lineNumber;
-    public static int mainLineNumber;
-    public static int columnCount;
-    public static int rowCount;
-    public static int forMarker;
-    public static int forMax;
-    public static boolean isCommand;
-    public static String validation;
-    public static String delimeter;
-    public static ArrayList<Class> importedCommands;
-    
+  public static String inString;
+  public static BufferedReader in;
+  public static PrintWriter out;
+  public static File currentFile;
+  public static int lineNumber;
+  public static int mainLineNumber;
+  public static int columnCount;
+  public static int rowCount;
+  public static int forMarker;
+  public static int forMax;
+  public static boolean isCommand;
+  public static String validation;
+  public static String delimeter;
+  public static ArrayList<String> importedCommands;
+
   public static void main(String[] args) throws Exception
   {
     Terminal.start();
@@ -35,7 +35,7 @@ public class Main
     isCommand = false;
     validation = "Not in conditional statement.";
     delimeter = ",";
-    importedCommands = new ArrayList<Class>();
+    importedCommands = new ArrayList<String>();
 
     File mainFile = new File("main.csvol");
     if (mainFile.length() == 0)
@@ -56,20 +56,32 @@ public class Main
         }
       }
       String line = in.readLine();
+      String originalLine = line;
       if (line.equals("") == false)
       {
         line = (((((line).replace("{","")).replace("}","")).replace(",","")).replace("<~"," "));
         StringTokenizer tokenizer = new StringTokenizer(line, " ");
+        StringTokenizer originalTokenizer = new StringTokenizer(originalLine, " ");
         ArrayList<String> arguments = new ArrayList<String>();
+        ArrayList<String> originalArguments = new ArrayList<String>();
         while(tokenizer.hasMoreTokens())
         {
           arguments.add(tokenizer.nextToken());
+        }
+        while(originalTokenizer.hasMoreTokens())
+        {
+          originalArguments.add(originalTokenizer.nextToken());
         }
         try
         {
           switch (arguments.get(0))
           {
             case "COMMENT": //Add comments in code
+              break;
+            case "~":
+              break;
+            case "ENSURE":
+              Ensure.fallBack(arguments);
               break;
             case "IMPORT":
               if ((arguments.get(1)).equals("COMMAND"))  
@@ -86,7 +98,7 @@ public class Main
               }
               break;
             case "IMPORTED":
-              Imported.fallBack(arguments);
+              Imported.fallBack(arguments, originalArguments);
               break;
             case "IF":
               if (isCommand == true)
@@ -220,7 +232,7 @@ public class Main
             default:
               if (isCommand == true)
               {
-                Terminal.disabled();
+                Terminal.terminalError();
               }
               else
               {
@@ -230,7 +242,14 @@ public class Main
         }
         catch(Exception e)
         {
-          Terminal.error();
+          if (isCommand == true)
+          {
+            Terminal.terminalError();
+          }
+          else
+          {
+            Terminal.error();
+          }
         }
       }
     }
@@ -244,10 +263,12 @@ public class Main
     }
     for (int i = importedCommands.size()-1; i >= 0; i--)
     {
-      File commandToDelete = new File((importedCommands.get(i)).getName() + ".java");
-      File commandClassToDelete = new File((importedCommands.get(i)).getName() + ".class");
+      File commandToDelete = new File(importedCommands.get(i)+ ".java");
+      File commandClassToDelete = new File(importedCommands.get(i) + ".class");
+      File commandGUIClassToDelete = new File(importedCommands.get(i) + "$1.class");
       commandToDelete.delete();
       commandClassToDelete.delete();
+      commandGUIClassToDelete.delete();
     }
   }
 }

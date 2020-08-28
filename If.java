@@ -21,8 +21,74 @@ public class If
 
     if ((arguments.get(3)).equals("CELL"))  
     {
-      columnPointer = Integer.parseInt(arguments.get(4));
-      rowPointer = Integer.parseInt(arguments.get(5));
+      columnPointer = 0;
+      rowPointer = 0;
+      try
+      {
+        columnPointer = Integer.parseInt(arguments.get(4));
+      }
+      catch(Exception e)
+      {
+        StringTokenizer tokenizerFind = new StringTokenizer(arguments.get(4), "#");
+        ArrayList<String> subArguments = new ArrayList<String>();
+        while(tokenizerFind.hasMoreTokens())
+        {
+          subArguments.add(tokenizerFind.nextToken());
+        }
+        if ((subArguments.get(0)).equals("FILE"))  
+        {
+          BufferedReader inFind = new BufferedReader(new FileReader((subArguments.get(1))+".csv"));
+          if ((subArguments.get(2)).equals("CELL"))  
+          {
+            int columnPointerFind = Integer.parseInt(subArguments.get(3));
+            int rowPointerFind = Integer.parseInt(subArguments.get(4));
+            for (int i = 0; i < rowPointerFind; i++)
+            {
+              inFind.readLine();
+            }
+            tokenizerFind = new StringTokenizer(inFind.readLine(), Main.delimeter);
+            ArrayList<String> cellStrings = new ArrayList<String>();
+            while(tokenizerFind.hasMoreTokens())
+            {
+              cellStrings.add(tokenizerFind.nextToken());
+            }
+            columnPointer = Integer.parseInt(cellStrings.get(columnPointerFind));
+          }
+        }
+      }
+      try
+      {
+        rowPointer = Integer.parseInt(arguments.get(5));
+      }
+      catch(Exception e)
+      {
+        StringTokenizer tokenizerFind = new StringTokenizer(arguments.get(5), "#");
+        ArrayList<String> subArguments = new ArrayList<String>();
+        while(tokenizerFind.hasMoreTokens())
+        {
+          subArguments.add(tokenizerFind.nextToken());
+        }
+        if ((subArguments.get(0)).equals("FILE"))  
+        {
+          BufferedReader inFind = new BufferedReader(new FileReader((subArguments.get(1))+".csv"));
+          if ((subArguments.get(2)).equals("CELL"))  
+          {
+            int columnPointerFind = Integer.parseInt(subArguments.get(3));
+            int rowPointerFind = Integer.parseInt(subArguments.get(4));
+            for (int i = 0; i < rowPointerFind; i++)
+            {
+              inFind.readLine();
+            }
+            tokenizerFind = new StringTokenizer(inFind.readLine(), Main.delimeter);
+            ArrayList<String> cellStrings = new ArrayList<String>();
+            while(tokenizerFind.hasMoreTokens())
+            {
+              cellStrings.add(tokenizerFind.nextToken());
+            }
+            rowPointer = Integer.parseInt(cellStrings.get(columnPointerFind));
+          }
+        }
+      }
       for (int i = 0; i < rowPointer; i++)
       {
         inEdit.readLine();
@@ -153,8 +219,74 @@ public class If
       inEdit = new BufferedReader(new FileReader((arguments.get(8))+".csv"));
       if ((arguments.get(9)).equals("CELL"))  
       {
-        columnPointer = Integer.parseInt(arguments.get(10));
-        rowPointer = Integer.parseInt(arguments.get(11));
+        columnPointer = 0;
+        rowPointer = 0;
+        try
+        {
+          columnPointer = Integer.parseInt(arguments.get(10));
+        }
+        catch(Exception e)
+        {
+          StringTokenizer tokenizerFind = new StringTokenizer(arguments.get(10), "#");
+          ArrayList<String> subArguments = new ArrayList<String>();
+          while(tokenizerFind.hasMoreTokens())
+          {
+            subArguments.add(tokenizerFind.nextToken());
+          }
+          if ((subArguments.get(0)).equals("FILE"))  
+          {
+            BufferedReader inFind = new BufferedReader(new FileReader((subArguments.get(1))+".csv"));
+            if ((subArguments.get(2)).equals("CELL"))  
+            {
+              int columnPointerFind = Integer.parseInt(subArguments.get(3));
+              int rowPointerFind = Integer.parseInt(subArguments.get(4));
+              for (int i = 0; i < rowPointerFind; i++)
+              {
+                inFind.readLine();
+              }
+              tokenizerFind = new StringTokenizer(inFind.readLine(), Main.delimeter);
+              ArrayList<String> cellStrings = new ArrayList<String>();
+              while(tokenizerFind.hasMoreTokens())
+              {
+                cellStrings.add(tokenizerFind.nextToken());
+              }
+              columnPointer = Integer.parseInt(cellStrings.get(columnPointerFind));
+            }
+          }
+        }
+        try
+        {
+          rowPointer = Integer.parseInt(arguments.get(11));
+        }
+        catch(Exception e)
+        {
+          StringTokenizer tokenizerFind = new StringTokenizer(arguments.get(11), "#");
+          ArrayList<String> subArguments = new ArrayList<String>();
+          while(tokenizerFind.hasMoreTokens())
+          {
+            subArguments.add(tokenizerFind.nextToken());
+          }
+          if ((subArguments.get(0)).equals("FILE"))  
+          {
+            BufferedReader inFind = new BufferedReader(new FileReader((subArguments.get(1))+".csv"));
+            if ((subArguments.get(2)).equals("CELL"))  
+            {
+              int columnPointerFind = Integer.parseInt(subArguments.get(3));
+              int rowPointerFind = Integer.parseInt(subArguments.get(4));
+              for (int i = 0; i < rowPointerFind; i++)
+              {
+                inFind.readLine();
+              }
+              tokenizerFind = new StringTokenizer(inFind.readLine(), Main.delimeter);
+              ArrayList<String> cellStrings = new ArrayList<String>();
+              while(tokenizerFind.hasMoreTokens())
+              {
+                cellStrings.add(tokenizerFind.nextToken());
+              }
+              rowPointer = Integer.parseInt(cellStrings.get(columnPointerFind));
+            }
+          }
+        }
         for (int i = 0; i < rowPointer; i++)
         {
           inEdit.readLine();

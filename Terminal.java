@@ -3,7 +3,7 @@ public class Terminal
   public static void start()
   {
     System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    System.out.println("CSVOL 0.9.1.");
+    System.out.println("CSVOL 0.9.4.");
     System.out.println("CSVOL Copyright (C) 2020 Abir Haque.");
     System.out.println("Developed by the Wichita Computer Programmers' Union.");
     System.out.println();
@@ -16,8 +16,9 @@ public class Terminal
   }
   public static void error()
   {
-    int errorLine = Main.lineNumber+1;
-    System.out.println("Error on line " + errorLine + " in " + Main.inString + ".");
+    int errorLine = Main.lineNumber;
+    System.out.println("CSVOL error ~> File " + Main.inString + " ~> Line " + errorLine+ ".");
+    System.exit(0);
   }
   public static void terminalError()
   {
@@ -41,7 +42,13 @@ public class Terminal
   }
   public static void libraryError()
   {
-    System.out.println("Failed to retrieve library. Please re-run your CSVOL program.");
+    System.out.println("Failed to retrieve library.");
+  }
+  public static void libraryEnsure()
+  {
+    System.out.println("You have ensured the existence of the library.");
+    System.out.println("Re-run the program to proceed.");
+    System.exit(0);
   }
   public static void done()
   {
