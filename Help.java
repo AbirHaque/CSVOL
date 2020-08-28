@@ -61,7 +61,7 @@ public class Help
     System.out.println("\tMODULE [module name] ---- Set stated module as method of command input.");
     System.out.println("\tMAIN ---- Set main.csvol as method of command input.");
     System.out.println();
-    System.out.println("See https://csvol-docs.wichitacpu.repl.co/docs.html for more details.");
+    System.out.println("See https://abirhaque.github.io/csvol-docs/docs.html for more details.");
     System.out.println();
   }
 }
