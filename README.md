@@ -1,5 +1,6 @@
 # CSVOL
-
+## Install:
+To install and run CSVOL 0.9.4, follow the instructions here: https://github.com/AbirHaque/CSVOL/releases/tag/v0.9.4.
 ## About
 Character Separated Value Organizer Language, or CSVOL (\kasväl\), is a language that is domain specific to managing, querying, and visualizing online/offline CSV datasets.
 
