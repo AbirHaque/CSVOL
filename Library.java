@@ -1,8 +1,7 @@
 import java.util.*;
 import java.lang.reflect.*;
 
-public class Imported
-{
+public class Library{
   public static void fallBack(ArrayList<String> args, ArrayList<String> originalArgs) throws Exception
   {
     ArrayList<String> arguments = args;

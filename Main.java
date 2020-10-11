@@ -16,7 +16,6 @@ public class Main
   public static boolean isCommand;
   public static String validation;
   public static String delimeter;
-  public static ArrayList<String> importedCommands;
 
   public static void main(String[] args) throws Exception
   {
@@ -35,7 +34,6 @@ public class Main
     isCommand = false;
     validation = "Not in conditional statement.";
     delimeter = ",";
-    importedCommands = new ArrayList<String>();
 
     File mainFile = new File("main.csvol");
     if (mainFile.length() == 0)
@@ -84,7 +82,7 @@ public class Main
               Ensure.fallBack(arguments);
               break;
             case "IMPORT":
-              if ((arguments.get(1)).equals("COMMAND"))  
+              if ((arguments.get(1)).equals("LIBRARY"))  
               {
                 Import.command(arguments);
               }
@@ -97,8 +95,8 @@ public class Main
                 Import.file(arguments);
               }
               break;
-            case "IMPORTED":
-              Imported.fallBack(arguments, originalArguments);
+            case "LIBRARY":
+              Library.fallBack(arguments, originalArguments);
               break;
             case "IF":
               if (isCommand == true)
@@ -221,9 +219,17 @@ public class Main
               Add.fallBack(arguments);
               break;
             case "DELETE": //Delete functions
-              if ((arguments.get(1)).equals("FILE")) //Print all contents function.      	
+              if ((arguments.get(1)).equals("FILE"))     	
               {
                 Delete.file(arguments);
+              }
+              if ((arguments.get(1)).equals("LIBRARY"))  
+              {
+                Delete.command(arguments);
+              }
+              if ((arguments.get(1)).equals("MODULE"))  
+              {
+                Delete.module(arguments);
               }
               break;
             case "HELP": //Prints function information
@@ -260,15 +266,6 @@ public class Main
     if (out != null)
     {
       out.close();
-    }
-    for (int i = importedCommands.size()-1; i >= 0; i--)
-    {
-      File commandToDelete = new File(importedCommands.get(i)+ ".java");
-      File commandClassToDelete = new File(importedCommands.get(i) + ".class");
-      File commandGUIClassToDelete = new File(importedCommands.get(i) + "$1.class");
-      commandToDelete.delete();
-      commandClassToDelete.delete();
-      commandGUIClassToDelete.delete();
     }
   }
 }

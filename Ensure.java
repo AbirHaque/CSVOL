@@ -9,11 +9,7 @@ public class Ensure
     File file = new File(arguments.get(1)+".class");
     if (file.exists())
     {
-      Runtime.getRuntime().exec("javac " + arguments.get(1)+".java");
+           Terminal.libraryEnsured();
     }
-    else
-    {
-      Terminal.libraryEnsure();
-    }
-  }
+else{Terminal.libraryNotEnsured();}  }
 }

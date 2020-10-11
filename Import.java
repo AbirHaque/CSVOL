@@ -11,7 +11,7 @@ public class Import
     switch(arguments.get(2))
     {
       case "csvol-sol":
-        directory = "https://csvol-docs.wichitacpu.repl.co/commands/";
+        directory = "https://csvol-docs.wichitacpu.repl.co/libraries/";
         Terminal.solLoading();
         break;
       default:
@@ -28,7 +28,6 @@ public class Import
             outFile.write(data, 0, byteContent);
         }
         outFile.close();
-        (Main.importedCommands).add(arguments.get(3));
         Runtime.getRuntime().exec("javac " + arguments.get(3)+".java");
         Terminal.done();
     }

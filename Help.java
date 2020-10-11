@@ -16,6 +16,8 @@ public class Help
     System.out.println("DELETE [options] [args...] ---- Deletes item dependent on option and args.");
     System.out.println("Where options include:");
     System.out.println("\tFILE [filename] ---- Deletes file.");
+    System.out.println("\tLIBRARY [library name] ---- Deletes library.");
+    System.out.println("\tMODULE [module name] ---- Deletes module.");
     System.out.println();
     System.out.println("DROP [options] ---- Nulls current method of input/output.");
     System.out.println("Where options include:");
@@ -43,11 +45,11 @@ public class Help
     System.out.println();
     System.out.println("IMPORT [option] [source] [file] ---- Imports library.");
     System.out.println("Where options include:");
-    System.out.println("\tCOMMAND ---- Imports command from source.");
+    System.out.println("\tLIBRARY ---- Imports library from source.");
     System.out.println("\tMODULE ---- Imports module from source.");
     System.out.println("\tFILE ---- Imports file from source");
     System.out.println();
-    System.out.println("IMPORTED [command] [arg...] ---- Uses imported library.");
+    System.out.println("LIBRARY [command] [args...] ---- Uses imported library.");
     System.out.println();
     System.out.println("PRINT [option] [arg] ---- Outputs item in command-line dependent on option and arg.");
     System.out.println("Where options include:");

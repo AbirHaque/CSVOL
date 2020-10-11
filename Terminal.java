@@ -2,12 +2,10 @@ public class Terminal
 {
   public static void start()
   {
-    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    System.out.println("CSVOL 0.9.4.");
+    System.out.println("");
+    System.out.println("CSVOL 21_0.0.0.");
     System.out.println("CSVOL Copyright (C) 2020 Abir Haque.");
-    System.out.println("Developed by the Wichita Computer Programmers' Union.");
-    System.out.println();
-  }
+ }
   public static void repl()
   {
     System.out.println("REPL enabled.");
@@ -44,13 +42,10 @@ public class Terminal
   {
     System.out.println("Failed to retrieve library.");
   }
-  public static void libraryEnsure()
+  public static void libraryEnsured()
   {
-    System.out.println("You have ensured the existence of the library.");
-    System.out.println("Re-run the program to proceed.");
-    System.exit(0);
-  }
-  public static void done()
+    System.out.println("Library exists."); }
+ public static void libraryNotEnsured(){System.out.println("Library does not exist or has not been imported.");} public static void done()
   {
     System.out.println("Done!");
   }
