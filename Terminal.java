@@ -3,7 +3,7 @@ public class Terminal
   public static void start()
   {
     System.out.println("");
-    System.out.println("CSVOL 21_0.0.0.");
+    System.out.println("CSVOL 21_0.1.0.");
     System.out.println("Copyright (C) 2020 Abir Haque.");
  }
   public static void repl()

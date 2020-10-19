@@ -19,7 +19,7 @@ public class If
     comparison2 = "";
     String context = "";
 
-    if ((arguments.get(3)).equals("CELL"))  
+    if ((arguments.get(3)).equalsIgnoreCase("CELL"))  
     {
       columnPointer = 0;
       rowPointer = 0;
@@ -35,10 +35,10 @@ public class If
         {
           subArguments.add(tokenizerFind.nextToken());
         }
-        if ((subArguments.get(0)).equals("FILE"))  
+        if ((subArguments.get(0)).equalsIgnoreCase("FILE"))  
         {
           BufferedReader inFind = new BufferedReader(new FileReader((subArguments.get(1))+".csv"));
-          if ((subArguments.get(2)).equals("CELL"))  
+          if ((subArguments.get(2)).equalsIgnoreCase("CELL"))  
           {
             int columnPointerFind = Integer.parseInt(subArguments.get(3));
             int rowPointerFind = Integer.parseInt(subArguments.get(4));
@@ -68,10 +68,10 @@ public class If
         {
           subArguments.add(tokenizerFind.nextToken());
         }
-        if ((subArguments.get(0)).equals("FILE"))  
+        if ((subArguments.get(0)).equalsIgnoreCase("FILE"))  
         {
           BufferedReader inFind = new BufferedReader(new FileReader((subArguments.get(1))+".csv"));
-          if ((subArguments.get(2)).equals("CELL"))  
+          if ((subArguments.get(2)).equalsIgnoreCase("CELL"))  
           {
             int columnPointerFind = Integer.parseInt(subArguments.get(3));
             int rowPointerFind = Integer.parseInt(subArguments.get(4));
@@ -203,7 +203,7 @@ public class If
       {
         String line = (Main.in).readLine();
         Main.lineNumber++;
-        if(line.equals("CONDITIONAL"))
+        if(line.equalsIgnoreCase("CONDITIONAL"))
         {
           loop = false;
           Main.validation = "Not in conditional statement.";
@@ -214,10 +214,10 @@ public class If
   public static void getValues(ArrayList<String> args) throws Exception
   {
     ArrayList<String> arguments = args;
-    if ((arguments.get(7)).equals("FILE"))  
+    if ((arguments.get(7)).equalsIgnoreCase("FILE"))  
     {
       inEdit = new BufferedReader(new FileReader((arguments.get(8))+".csv"));
-      if ((arguments.get(9)).equals("CELL"))  
+      if ((arguments.get(9)).equalsIgnoreCase("CELL"))  
       {
         columnPointer = 0;
         rowPointer = 0;
@@ -233,10 +233,10 @@ public class If
           {
             subArguments.add(tokenizerFind.nextToken());
           }
-          if ((subArguments.get(0)).equals("FILE"))  
+          if ((subArguments.get(0)).equalsIgnoreCase("FILE"))  
           {
             BufferedReader inFind = new BufferedReader(new FileReader((subArguments.get(1))+".csv"));
-            if ((subArguments.get(2)).equals("CELL"))  
+            if ((subArguments.get(2)).equalsIgnoreCase("CELL"))  
             {
               int columnPointerFind = Integer.parseInt(subArguments.get(3));
               int rowPointerFind = Integer.parseInt(subArguments.get(4));
@@ -266,10 +266,10 @@ public class If
           {
             subArguments.add(tokenizerFind.nextToken());
           }
-          if ((subArguments.get(0)).equals("FILE"))  
+          if ((subArguments.get(0)).equalsIgnoreCase("FILE"))  
           {
             BufferedReader inFind = new BufferedReader(new FileReader((subArguments.get(1))+".csv"));
-            if ((subArguments.get(2)).equals("CELL"))  
+            if ((subArguments.get(2)).equalsIgnoreCase("CELL"))  
             {
               int columnPointerFind = Integer.parseInt(subArguments.get(3));
               int rowPointerFind = Integer.parseInt(subArguments.get(4));
@@ -300,7 +300,7 @@ public class If
         comparison2 = cellStrings.get(columnPointer);
       }
     }
-    if ((arguments.get(7)).equals("TEXT"))  
+    if ((arguments.get(7)).equalsIgnoreCase("TEXT"))  
     {
       for (int i = 8; i < arguments.size()-1; i++)
       {

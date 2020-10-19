@@ -12,15 +12,15 @@ public class Edit
     ArrayList<String> arguments = args;
     Main.currentFile = new File((arguments.get(2)) + ".csv");
     inEdit = new BufferedReader(new FileReader((Main.currentFile).getName())); 
-    if ((arguments.get(3)).equals("COLUMNS"))
+    if ((arguments.get(3)).equalsIgnoreCase("COLUMNS"))
     {
       columns(arguments);
     }
-    if ((arguments.get(3)).equals("ROWS"))
+    if ((arguments.get(3)).equalsIgnoreCase("ROWS"))
     {
       rows(arguments);
     }
-    if ((arguments.get(3)).equals("CELL"))
+    if ((arguments.get(3)).equalsIgnoreCase("CELL"))
     {
       cell(arguments);
     }
@@ -28,7 +28,7 @@ public class Edit
   public static void columns(ArrayList<String> args) throws Exception
   {
     ArrayList<String> arguments = args;
-    if ((arguments.get(4)).equals("ADD"))
+    if ((arguments.get(4)).equalsIgnoreCase("ADD"))
     {
       int columnsToAdd = 0;
       String columnsString = inEdit.readLine();
@@ -56,7 +56,7 @@ public class Edit
       inEdit.close();
       outEdit.close();
     }
-    if ((arguments.get(4)).equals("DELETE"))
+    if ((arguments.get(4)).equalsIgnoreCase("DELETE"))
     {
       int minDomain = Integer.parseInt(arguments.get(5));
       int maxDomain = Integer.parseInt(arguments.get(6));
@@ -111,7 +111,7 @@ public class Edit
   public static void rows(ArrayList<String> args) throws Exception// 5:39pm 8/25
   {
     ArrayList<String> arguments = args;
-    if ((arguments.get(4)).equals("ADD"))
+    if ((arguments.get(4)).equalsIgnoreCase("ADD"))
     {
       ArrayList<String> fileLines = new ArrayList<String>();
       fileLines.add(inEdit.readLine());
@@ -128,10 +128,10 @@ public class Edit
         fileLines.add(inEdit.readLine());
       }
       int rowsToAdd = 0;
-      if ((arguments.get(5)).equals("FILE"))
+      if ((arguments.get(5)).equalsIgnoreCase("FILE"))
       {
         BufferedReader inFind = new BufferedReader(new FileReader((arguments.get(6))+".csv"));
-        if ((arguments.get(7)).equals("CELL"))  
+        if ((arguments.get(7)).equalsIgnoreCase("CELL"))  
         {
           int columnPointer = Integer.parseInt(arguments.get(8));
           int rowPointer = Integer.parseInt(arguments.get(9));
@@ -164,7 +164,7 @@ public class Edit
       inEdit.close();
       outEdit.close();
     }
-    if ((arguments.get(4)).equals("DELETE"))
+    if ((arguments.get(4)).equalsIgnoreCase("DELETE"))
     {
       int minRange = Integer.parseInt(arguments.get(5));
       int maxRange = Integer.parseInt(arguments.get(6));
@@ -208,10 +208,10 @@ public class Edit
       {
         subArguments.add(tokenizerFind.nextToken());
       }
-      if ((subArguments.get(0)).equals("FILE"))  
+      if ((subArguments.get(0)).equalsIgnoreCase("FILE"))  
       {
         BufferedReader inFind = new BufferedReader(new FileReader((subArguments.get(1))+".csv"));
-        if ((subArguments.get(2)).equals("CELL"))  
+        if ((subArguments.get(2)).equalsIgnoreCase("CELL"))  
         {
           int columnPointerFind = Integer.parseInt(subArguments.get(3));
           int rowPointerFind = Integer.parseInt(subArguments.get(4));
@@ -241,10 +241,10 @@ public class Edit
       {
         subArguments.add(tokenizerFind.nextToken());
       }
-      if ((subArguments.get(0)).equals("FILE"))  
+      if ((subArguments.get(0)).equalsIgnoreCase("FILE"))  
       {
         BufferedReader inFind = new BufferedReader(new FileReader((subArguments.get(1))+".csv"));
-        if ((subArguments.get(2)).equals("CELL"))  
+        if ((subArguments.get(2)).equalsIgnoreCase("CELL"))  
         {
           int columnPointerFind = Integer.parseInt(subArguments.get(3));
           int rowPointerFind = Integer.parseInt(subArguments.get(4));
@@ -278,7 +278,7 @@ public class Edit
     {
       case "FILE":
         BufferedReader inEdit = new BufferedReader(new FileReader((arguments.get(7))+".csv")); 
-        if ((arguments.get(8)).equals("CELL"))  
+        if ((arguments.get(8)).equalsIgnoreCase("CELL"))  
         {
           int columnPointerFind = 0;
           int rowPointerFind = 0;
@@ -294,10 +294,10 @@ public class Edit
             {
               subArguments.add(tokenizerFind.nextToken());
             }
-            if ((subArguments.get(0)).equals("FILE"))  
+            if ((subArguments.get(0)).equalsIgnoreCase("FILE"))  
             {
               BufferedReader inFind = new BufferedReader(new FileReader((subArguments.get(1))+".csv"));
-              if ((subArguments.get(2)).equals("CELL"))  
+              if ((subArguments.get(2)).equalsIgnoreCase("CELL"))  
               {
                 int columnPointerFind2 = Integer.parseInt(subArguments.get(3));
                 int rowPointerFind2 = Integer.parseInt(subArguments.get(4));
@@ -327,10 +327,10 @@ public class Edit
             {
               subArguments.add(tokenizerFind.nextToken());
             }
-            if ((subArguments.get(0)).equals("FILE"))  
+            if ((subArguments.get(0)).equalsIgnoreCase("FILE"))  
             {
               BufferedReader inFind = new BufferedReader(new FileReader((subArguments.get(1))+".csv"));
-              if ((subArguments.get(2)).equals("CELL"))  
+              if ((subArguments.get(2)).equalsIgnoreCase("CELL"))  
               {
                 int columnPointerFind2 = Integer.parseInt(subArguments.get(3));
                 int rowPointerFind2 = Integer.parseInt(subArguments.get(4));
@@ -365,10 +365,10 @@ public class Edit
         int number1 = 0;
         int number2 = 0;
         String operator = "";
-        if ((arguments.get(7)).equals("FILE"))
+        if ((arguments.get(7)).equalsIgnoreCase("FILE"))
         {
           inEdit = new BufferedReader(new FileReader((arguments.get(8))+".csv")); 
-          if ((arguments.get(9)).equals("CELL"))  
+          if ((arguments.get(9)).equalsIgnoreCase("CELL"))  
           {
             int columnPointerFind = Integer.parseInt(arguments.get(10));
             int rowPointerFind = Integer.parseInt(arguments.get(11));
@@ -384,10 +384,10 @@ public class Edit
             }
             number1 = Integer.parseInt(cellStrings.get(columnPointerFind));
             operator = arguments.get(12);
-            if ((arguments.get(13)).equals("FILE"))
+            if ((arguments.get(13)).equalsIgnoreCase("FILE"))
             {
               inEdit = new BufferedReader(new FileReader((arguments.get(14))+".csv")); 
-              if ((arguments.get(15)).equals("CELL"))  
+              if ((arguments.get(15)).equalsIgnoreCase("CELL"))  
               {
                 columnPointerFind = Integer.parseInt(arguments.get(16));
                 rowPointerFind = Integer.parseInt(arguments.get(17));
@@ -414,10 +414,10 @@ public class Edit
         {
           number1 = Integer.parseInt(arguments.get(7));
           operator = arguments.get(8);
-          if ((arguments.get(9)).equals("FILE"))
+          if ((arguments.get(9)).equalsIgnoreCase("FILE"))
           {
             inEdit = new BufferedReader(new FileReader((arguments.get(10))+".csv")); 
-            if ((arguments.get(11)).equals("CELL"))  
+            if ((arguments.get(11)).equalsIgnoreCase("CELL"))  
             {
               int columnPointerFind = Integer.parseInt(arguments.get(9));
               int rowPointerFind = Integer.parseInt(arguments.get(10));

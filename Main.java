@@ -11,8 +11,6 @@ public class Main
   public static int mainLineNumber;
   public static int columnCount;
   public static int rowCount;
-  public static int forMarker;
-  public static int forMax;
   public static boolean isCommand;
   public static String validation;
   public static String delimeter;
@@ -29,8 +27,8 @@ public class Main
     mainLineNumber = 0;
     columnCount = 0;
     rowCount = 0;
-    forMarker = 0;
-    forMax = 0;
+    
+
     isCommand = false;
     validation = "Not in conditional statement.";
     delimeter = ",";
@@ -74,44 +72,44 @@ public class Main
         {
           switch (arguments.get(0))
           {
-            case "COMMENT": //Add comments in code
+            case "comment": case "COMMENT": //Add comments in code
               break;
             case "~":
               break;
-            case "ENSURE":
+            case "ensure": case "ENSURE":
               Ensure.fallBack(arguments);
               break;
-            case "IMPORT":
-              if ((arguments.get(1)).equals("LIBRARY"))  
+            case "import": case "IMPORT":
+              if ((arguments.get(1)).equalsIgnoreCase("LIBRARY"))  
               {
                 Import.command(arguments);
               }
-              if ((arguments.get(1)).equals("MODULE"))  
+              if ((arguments.get(1)).equalsIgnoreCase("MODULE"))  
               {
                 Import.module(arguments);
               }
-              if ((arguments.get(1)).equals("FILE"))  
+              if ((arguments.get(1)).equalsIgnoreCase("FILE"))  
               {
                 Import.file(arguments);
               }
               break;
-            case "LIBRARY":
+           case "library": case "LIBRARY":
               Library.fallBack(arguments, originalArguments);
               break;
-            case "IF":
+            case "if": case "IF":
               if (isCommand == true)
               {
                 Terminal.disabled();
               }
               else
               {
-                if ((arguments.get(1)).equals("FILE"))  
+                if ((arguments.get(1)).equalsIgnoreCase("FILE"))  
                 {
                   If.file(arguments);
                 }
               }
               break;
-            case "CONDITIONAL":
+            case "conditional": case "CONDITIONAL":
               if (isCommand == true)
               {
                 Terminal.disabled();
@@ -121,48 +119,26 @@ public class Main
                 Conditional.fallBack();
               }
               break;
-            case "FOR":
-              if (isCommand == true)
-              {
-                Terminal.disabled();
-              }
-              else
-              {
-                if ((arguments.get(1)).equals("MAX"))  
-                {
-                  For.max(arguments);
-                }
-              }
-            case "LOOP":
-              if (isCommand == true)
-              {
-                Terminal.disabled();
-              }
-              else
-              {
-                Loop.fallBack();
-              }
-              break;
-            case "CREATE": //Create functions
-              if ((arguments.get(1)).equals("FILE")) //Create file function       	
+            case "create": case "CREATE": //Create functions
+              if ((arguments.get(1)).equalsIgnoreCase("FILE")) //Create file function       	
               {
                 Create.file(arguments);
               }
-              if ((arguments.get(1)).equals("COLUMNS")) //Create column function       	
+              if ((arguments.get(1)).equalsIgnoreCase("COLUMNS")) //Create column function       	
               {
                 Create.columns(arguments);
               }
-              if ((arguments.get(1)).equals("ROWS")) //Create row function       	
+              if ((arguments.get(1)).equalsIgnoreCase("ROWS")) //Create row function       	
               {
                 Create.rows(arguments);
               }
               break;
-            case "PULL": //Pull functions
-              if ((arguments.get(1)).equals("FILE")) //Pull existing file function      	
+            case "pull": case "PULL": //Pull functions
+              if ((arguments.get(1)).equalsIgnoreCase("FILE")) //Pull existing file function      	
               {
                 Pull.file(arguments);
               }
-              if ((arguments.get(1)).equals("REPL")) //Pull command function      	
+              if ((arguments.get(1)).equalsIgnoreCase("REPL")) //Pull command function      	
               {
                 if (isCommand == true)
                 {
@@ -173,11 +149,11 @@ public class Main
                   Pull.repl();
                 }           
               }
-              if ((arguments.get(1)).equals("MODULE"))   	
+              if ((arguments.get(1)).equalsIgnoreCase("MODULE"))   	
               {
                 Pull.module(arguments);            
               }
-              if ((arguments.get(1)).equals("MAIN"))   	
+              if ((arguments.get(1)).equalsIgnoreCase("MAIN"))   	
               {
                 if (isCommand == true)
                 {
@@ -189,50 +165,50 @@ public class Main
                 }
               }
               break;
-            case "DROP": //Drop function
-              if ((arguments.get(1)).equals("FILE")) //Drop current file function      	
+            case "drop": case "DROP": //Drop function
+              if ((arguments.get(1)).equalsIgnoreCase("FILE")) //Drop current file function      	
               {
                 Drop.file();
               }
-              if ((arguments.get(1)).equals("REPL")) //Drop command function      	
+              if ((arguments.get(1)).equalsIgnoreCase("REPL")) //Drop command function      	
               {
                 Drop.repl();
               }
               break;
-            case "PRINT": //Print functions
-              if ((arguments.get(1)).equals("TEXT")) //Print text function    	
+            case "print": case "PRINT": //Print functions
+              if ((arguments.get(1)).equalsIgnoreCase("TEXT")) //Print text function    	
               {
                 Print.text(arguments);
               }
-              if ((arguments.get(1)).equals("FILE")) //Print all contents function.      	
+              if ((arguments.get(1)).equalsIgnoreCase("FILE")) //Print all contents function.      	
               {
                 Print.file(arguments);
               }  
               break;
-            case "EDIT": 
-              if ((arguments.get(1)).equals("FILE"))     	
+            case "edit": case "EDIT": 
+              if ((arguments.get(1)).equalsIgnoreCase("FILE"))     	
               {
                 Edit.file(arguments);
               }
               break;
-            case "ADD": 
+            case "add": case "ADD": 
               Add.fallBack(arguments);
               break;
-            case "DELETE": //Delete functions
-              if ((arguments.get(1)).equals("FILE"))     	
+            case "delete": case "DELETE": //Delete functions
+              if ((arguments.get(1)).equalsIgnoreCase("FILE"))     	
               {
                 Delete.file(arguments);
               }
-              if ((arguments.get(1)).equals("LIBRARY"))  
+              if ((arguments.get(1)).equalsIgnoreCase("LIBRARY"))  
               {
                 Delete.command(arguments);
               }
-              if ((arguments.get(1)).equals("MODULE"))  
+              if ((arguments.get(1)).equalsIgnoreCase("MODULE"))  
               {
                 Delete.module(arguments);
               }
               break;
-            case "HELP": //Prints function information
+            case "help": case "HELP": //Prints function information
               Help.fallBack();
               break;
             default:
